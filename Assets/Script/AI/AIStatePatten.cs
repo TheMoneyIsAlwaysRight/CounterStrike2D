@@ -8,24 +8,26 @@ using UnityEngine.U2D;
 
 public class AIStatePatten : MonoBehaviour
 {
-    [SerializeField] Transform missionPlace;
     [SerializeField] PathFinding pathfinder;
     [SerializeField] GameObject Enemy;
-    List<Node> MissionTrack;
-    float AimToEnemyTime = 1.5f;
+    float AimToEnemyTime = .1f;
     int nextNode;
-    float alertTime = 3f;
+    float alertTime = 1f;
     Coroutine AimandFire;
     [SerializeField] GameObject FindEnemyNodeListParent; //적군 정찰 노드 리스트
+    Vector2 targetVector;
 
-    List<Transform> NodeList; 
+    List<Node> MissionNodeTrack;
+    List<Transform> ReconPositionList;
+    List<Node> ForReconPositionNodeTrack;
+    [SerializeField]bool IsRecon;
     
     IEnumerator AimToEnemy()
     {
         AimToEnemyTime -= Time.deltaTime;
         yield return new WaitForSeconds(1f);
     }
-    float angleRange = 90f; // 각도범위
+    float angleRange = 360f; // 각도범위
     float distance = 15f; // 부채꼴(시야)의 반지름 크기.
     enum State //Ai의 상태 패턴
     {
@@ -34,6 +36,8 @@ public class AIStatePatten : MonoBehaviour
         alert,
         battle,
         die,
+        recon,
+        defence
     }
     State curstate;
     bool IspathFind = false;
@@ -43,12 +47,16 @@ public class AIStatePatten : MonoBehaviour
         //curstate = State.shopping;
         curstate = State.mission;
         nextNode = 0;
-        NodeList = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
+
+        ReconPositionList = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
+        curstate = State.mission;
+
+        targetVector = (Enemy.transform.position - gameObject.transform.position);
 
     }
     private void Update()
     {
-        AIWeaponPatten();
+      AIWeaponPatten();
     }
 
     private void FixedUpdate()
@@ -66,6 +74,9 @@ public class AIStatePatten : MonoBehaviour
                 break;
             case State.battle:
                 Battle();
+                break;
+            case State.defence:
+                Defence();
                 break;
             case State.die:
                 Die();
@@ -106,38 +117,96 @@ public class AIStatePatten : MonoBehaviour
     }
     void Mission()
     {
-        gameObject.GetComponent<AI>().movespeed = 15f;
+        gameObject.GetComponent<AI>().movespeed = 7f;
 
         if (!IspathFind)
         {
-            Debug.Log("새 경로 찾기");
-            int RandomNode = Mathf.RoundToInt(Random.Range(0, NodeList.Count-1));
-
-            if(Vector2.Distance(transform.position, NodeList[RandomNode].position)< 0.1f)
+            int RandomNode = Mathf.RoundToInt(Random.Range(0, ReconPositionList.Count - 1));
+            if (Vector2.Distance(transform.position, (Vector2)ReconPositionList[RandomNode].position) < 0.5f)
             {
-                Debug.Log("동일 경로로 판정. 새 경로 탐색");
-                return; 
+                return;
             }
-            pathfinder.FindPath(transform.position,NodeList[RandomNode].position);
+            MissionNodeTrack = pathfinder.FindPath(transform.position, (Vector2)ReconPositionList[RandomNode].position);
             nextNode = 0;
             IspathFind = true;
         }
         else
         {
-            AIPath();
-            Vector2 targetVector = (Enemy.transform.position - gameObject.transform.position);
-
-            if (targetVector.sqrMagnitude < distance * distance)
+            if (MissionNodeTrack == null)
             {
-                float angle = Vector2.Angle(targetVector.normalized, transform.up);
-
-                if (angle < angleRange)
+                IspathFind = false;
+                return;
+            }
+            else if(MissionNodeTrack != null)
+            {
+                AIPath(MissionNodeTrack);
+                if (targetVector.sqrMagnitude < distance * distance)
                 {
-                    ChangeState(State.battle);
+                    float angle = Vector2.Angle(targetVector.normalized, transform.up);
+
+                    if (angle < angleRange)
+                    {
+                        ChangeState(State.battle);
+                    }
                 }
             }
+            
         }
     }
+
+    void AIPath(List<Node> nodeList)
+    {
+        if (nodeList != null && nodeList.Count > 0)
+        {
+            Node next = nodeList[0];
+
+            Vector2 dir = (next.worldPosition - transform.position).normalized;
+            transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
+            if (Vector2.Distance(gameObject.transform.position, next.worldPosition) < 2f)
+            {
+                if (next == nodeList[nodeList.Count - 1]) //nodeList의 목표 지점 도착
+                {
+                    ChangeState(State.alert);
+                    nodeList.RemoveAt(0);
+                    return;
+                }
+                nodeList.RemoveAt(0);
+            }
+        }
+
+    }
+    //void Recon()
+    //{
+    //    gameObject.GetComponent<AI>().movespeed = 7f;
+
+    //    if (!IspathFind)
+    //    {
+    //        int RandomNode = Mathf.RoundToInt(Random.Range(0, ReconPositionList.Count - 1));
+    //        if (Vector2.Distance(transform.position,(Vector2)ReconPositionList[RandomNode].position) < 0.5f)
+    //        {
+    //            return;
+    //        }
+    //        ForReconPositionNodeTrack = pathfinder.FindPath(transform.position, (Vector2)ReconPositionList[RandomNode].position);
+    //        IspathFind = true;
+    //    }
+    //    else
+    //    {
+    //        AIPath(ForReconPositionNodeTrack);
+
+    //        if (targetVector.sqrMagnitude < distance * distance)
+    //        {
+    //            float angle = Vector2.Angle(targetVector.normalized, transform.up);
+
+    //            if (angle < angleRange)
+    //            {
+    //                ChangeState(State.battle);
+    //                IspathFind = false;
+
+    //            }
+    //        }
+    //    }
+
+    //}
     void Alert() //경계 상태.
     {
         gameObject.GetComponent<AI>().movespeed = 2f;
@@ -160,19 +229,22 @@ public class AIStatePatten : MonoBehaviour
         }
 
     }
+    void Defence() //경계 상태.
+    {       
+        if (targetVector.sqrMagnitude < distance * distance)
+        {
+            float angle = Vector2.Angle(targetVector.normalized, transform.up);
+
+            if (angle < angleRange)
+            {
+                ChangeState(State.battle);
+            }
+        }
+    }
     void Die() //사망 상태
     {
     }
 
-
-    //private void OnDrawGizmos()
-    //{
-    //    Handles.color = new Color(2f, 0f, 0f, 0.1f);
-
-    //    Handles.DrawSolidArc(transform.position, transform.forward, transform.up, angleRange / 2, distance);
-
-    //    Handles.DrawSolidArc(transform.position, transform.forward, transform.up, -angleRange / 2, distance);
-    //}
     IEnumerator AlertTime()
     {
         this.alertTime -= Time.deltaTime;
@@ -190,39 +262,17 @@ public class AIStatePatten : MonoBehaviour
             gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
         }
     }
-
-    void AIPath()
+    List<Node> CalculatePath()
     {
+        List<Node> list = pathfinder.FindPath(transform.position,targetVector);
 
-        if (pathfinder.npcpath != null)
+        IspathFind = true;
+        if(list == null)
         {
-            if (pathfinder.npcpath.Count > 0)
-            {
-                List<Node> path = pathfinder.npcpath;
-                Node next = path[nextNode];
-                Vector2 dir = (next.worldPosition - transform.position).normalized;
-                transform.Translate(dir * Time.deltaTime*gameObject.GetComponent<AI>().movespeed, Space.World);
-
-                if(Vector2.Distance(gameObject.transform.position,next.worldPosition) <= 0.5f)
-                {
-                 
-                    if (next == path[path.Count - 1])
-                    {
-                        Debug.Log("경로 도착 완료");
-                        IspathFind = false;    
-                        return;
-                    }                 
-                    nextNode++;
-                }
-            }
-
+            Debug.Log("경로 파악 불가");
         }
-        else
-        {
-            Debug.Log($"{pathfinder}가 Null입니다");
-            ChangeState(State.alert);
-            return;
-        }
+        return list;
+
     }
 
 }

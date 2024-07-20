@@ -151,7 +151,6 @@ public class WeaponManager : MonoBehaviour
         if(curweapon == swapweapon) // 기존 무기와 동일한 무기를 들려할 경우
         {
             prevweapon = null;
-            Debug.Log("같은 무기로 바꾸기");
             return;
         }
 

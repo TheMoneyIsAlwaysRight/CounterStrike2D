@@ -38,7 +38,6 @@ public class BOMB : MonoBehaviour
                 bombplant = StartCoroutine(Planting());
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
-                    Debug.Log("ÆøÅº ¼³Ä¡ Ãë¼Ò");
                     PlantingTime = 5f;
                 }
             }
@@ -46,7 +45,6 @@ public class BOMB : MonoBehaviour
         }
         else
         {
-            Debug.Log("ÆøÅº ¼³Ä¡ ±¸¿ªÀÌ ¾Æ´Õ´Ï´Ù!");
         }
     }
     }

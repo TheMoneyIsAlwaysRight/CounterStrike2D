@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4456144531643543913}
   - component: {fileID: 8100408826761965911}
   - component: {fileID: 8681489332639489042}
-  m_Layer: 3
+  m_Layer: 4
   m_Name: plantedbomb_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,19 +8,12 @@ using UnityEngine;
 public class PathFinding : MonoBehaviour
 {
     Grid grid;
-    public List<Node> npcpath;
-
     private void Awake()
     {
         grid = GetComponent<Grid>();
     }
-    public void FindPath(Vector3 startPos, Vector3 targetPos)
+    public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        if(npcpath != null)
-        {
-            npcpath = null;
-        }
-
         Node startNode = grid.NodeFromWorldPoint(startPos); //시작 노드 
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
         List<Node> openSet = new List<Node>(); //방문해야할 노드들
@@ -45,11 +38,21 @@ public class PathFinding : MonoBehaviour
 
             if (node == targetNode) //경로를 다 찾았다면.
             {
-                RetracePath(startNode, targetNode);
-                return;
+                List<Node> path = new List<Node>();
+                Node currentNode = targetNode;
+
+                while (currentNode != startNode)
+                {
+                    path.Add(currentNode);
+                    currentNode = currentNode.parent;
+                }
+                path.Reverse();
+
+                grid.path = path;
+
+                return path;
 
             }
-
             foreach (Node neighbour in grid.GetNeighbors(node))
             {
                 if (!neighbour.walkable || visited.Contains(neighbour))
@@ -73,6 +76,9 @@ public class PathFinding : MonoBehaviour
                 }
             }
         }
+
+        return null;
+
     }
 
     int GetDistance(Node A, Node B) 
@@ -84,21 +90,5 @@ public class PathFinding : MonoBehaviour
             return 14 * dstY + 10 * (dstX - dstY);
         }
         return 14 * dstX + 10 * (dstY - dstX);
-    }
-
-    void RetracePath(Node startNode, Node endNode)
-    {
-        List<Node> path = new List<Node>();
-        Node currentNode = endNode;
-
-        while (currentNode != startNode)
-        {
-            path.Add(currentNode);
-            currentNode = currentNode.parent;
-        }
-        path.Reverse();
-
-        grid.path = path;
-        npcpath = path;
     }
 }
