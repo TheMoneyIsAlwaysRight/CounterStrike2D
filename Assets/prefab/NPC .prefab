@@ -108,6 +108,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 5553699255905741285, guid: 6098039f1aec817488fa2bfe9ecf85db, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &750778203518005628
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +217,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3786274634129217071, guid: 7fa353c4b7174a84aa25be342da2b8da, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &785990763191989426
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 0}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &829344458349276260
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +435,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3909310748764325053, guid: 6b6ba016eef730a44984e4cb2adf0f24, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &1094839850132375620
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +544,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2791274659651454459, guid: 8ef38cc1aa7969d4db73a082a4d0051f, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &1567102540343778436
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +653,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3612328292289210282, guid: e74182818bf90004abfc9a283614c728, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &1959533502694266200
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +762,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 7505006380398487099, guid: b9abad014ea862747b0ea1b688d68bed, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &2517409223996242447
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +991,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 956954202361992944, guid: e4f885567a04c204c90e28d44776e559, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &3365289905278440215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1074,7 @@ SpriteRenderer:
   m_Size: {x: 40, y: 22.5625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2687543708100247801
@@ -1081,6 +1089,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7591c872a5eb48d4b877f306e23f157d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3598465173132485822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1735309247287616221}
+  - component: {fileID: 3278545492832557840}
+  m_Layer: 0
+  m_Name: EnemyDectector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1735309247287616221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3598465173132485822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1594873139011377657}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &3278545492832557840
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3598465173132485822}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
 --- !u!1 &3627700489187143744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1264,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2775532415019169083, guid: 01988df6f80afa34c9c4aec2cc78d191, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &3678465455343699387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1373,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2813660748378044094, guid: 76a373389941d924f9909179fd94d68d, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &3707512139641391746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,6 +1445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d274948ec9184e4f955bdccb9133f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppoint: {fileID: 2517409223996242447}
+  BuyMenu: {fileID: 0}
   user: {fileID: 5080451708305175464}
   HAND:
   - {fileID: 0}
@@ -1375,10 +1454,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  droppoint: {fileID: 2517409223996242447}
   curweapon: {fileID: 0}
   prevweapon: {fileID: 0}
-  BuyMenu: {fileID: 0}
   CanIPlantBomb: 0
   IsBuyCant: 0
 --- !u!114 &2387973379520804617
@@ -1519,6 +1596,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 1909913157640074229, guid: 5441ed48921641545b0fdcfedb755bff, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &5078083297769093331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1705,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 7046813788975839758, guid: 642dafb6f416ba247a089c4abc0114f9, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &5446814742485380840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1814,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6822156600451235756, guid: 00592385b6a6d644f919a50d54595062, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &5551545160347515022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1897,7 @@ SpriteRenderer:
   m_Size: {x: 6.4, y: 3.61}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &8224771346887694627
@@ -1869,6 +1949,7 @@ Transform:
   - {fileID: 3845844840676373418}
   - {fileID: 4328813045032955686}
   - {fileID: 1999826616388183359}
+  - {fileID: 1735309247287616221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &19354977201420739
@@ -1976,6 +2057,9 @@ MonoBehaviour:
   FireFlash: {fileID: 5551545160347515022}
   FireFlash2: {fileID: 3365289905278440215}
   weaponmanager: {fileID: 5741894235634716431}
+  reloadsound: {fileID: 0}
+  reloadsound2: {fileID: 0}
+  audiosource: {fileID: 0}
   movespeed: 6.31
 --- !u!114 &4274740903092909341
 MonoBehaviour:
@@ -1989,10 +2073,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec37adaf4879fc40a5558000988a0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionPlace: {fileID: 0}
-  pathfinder: {fileID: 8142461299216830420}
-  Enemy: {fileID: 0}
   FindEnemyNodeListParent: {fileID: 0}
+  pathfinder: {fileID: 8142461299216830420}
+  player: {fileID: 0}
 --- !u!1 &5657834329308963376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,6 +2184,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 1432911431909425359, guid: cb963d8ca240b05498e4a0bf5ca68294, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &5902560025190007972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,7 +2248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9453bc0b00e0048a416c214eea9742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcpath: []
 --- !u!1 &5909503245091835295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,6 +2356,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6616260358776549176, guid: 50e2a941f9f438c4e897785c4636ff51, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &6159437257678720601
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,6 +2704,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6809943812970459611, guid: 8c89342543c2b884c8106c80fd925536, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &6742378744613680873
 GameObject:
   m_ObjectHideFlags: 0
@@ -2728,6 +2813,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2389188657431610390, guid: 2b5ef652759dd7a4fa46e1074a772619, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &6762615269224831495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,6 +2922,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 4479919105691261347, guid: 9b7be572208f0f54ea11e8cc631a5957, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &6955752577626870695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,7 +3004,7 @@ SpriteRenderer:
   m_Size: {x: 1.26, y: 1.09}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7257141976121501405
@@ -3028,6 +3115,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3337234118964428762, guid: 46993ce24dcbacf4ea95214a7eaffeda, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &7729584563653069075
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3224,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3977944179001267047, guid: a91eb7032dacc5a47b55f622ef640850, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &7918731222955156543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3217,7 +3306,7 @@ SpriteRenderer:
   m_Size: {x: 0.81, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7996099482723893388
@@ -3328,6 +3417,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 8133845880362589041, guid: 2a6e233ef199e954d86ece914768e43f, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &8153371609700006659
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3526,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6922047153903477196, guid: 07ea6cc5d1cb4ca4db9d54c0eeb1efcb, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &8302883359725410767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3545,6 +3636,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2407713109183638370, guid: 9a1aa2b07e8f91042bf1db1ce574b7b0, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!114 &9017781584358539723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3667,6 +3759,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6662434010620261726, guid: 5d9df2d01da9f5d48af7773da4e23fb2, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &8523135993318773037
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,6 +3868,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 5961932110395093913, guid: 6bb82389f26ab5c46a7986cab9a65224, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &8989390130133083885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,6 +3977,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6226747081241871960, guid: 0568b8bda4ded0147a203dc53d0cbcd2, type: 3}
   firepoint: {fileID: 2517409223996242447}
+  FireSound: {fileID: 0}
 --- !u!1 &9029394341133125634
 GameObject:
   m_ObjectHideFlags: 0
@@ -3964,6 +4059,6 @@ SpriteRenderer:
   m_Size: {x: 1.26, y: 0.67}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
