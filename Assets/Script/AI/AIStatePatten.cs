@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AIStatePatten : MonoBehaviour
 {
-    enum State //Ai의 상태 패턴
+    public enum State //Ai의 상태 패턴
     {
         Buy,
         Mission,
@@ -18,7 +18,6 @@ public class AIStatePatten : MonoBehaviour
     [SerializeField] GameObject FindEnemyNodeListParent; //적군 정찰 노드 리스트
     [SerializeField] PathFinding pathfinder;
 
-    Coroutine AimandFire;
     Vector2 targetVector;
 
     List<Node> MissionNodeTrack;
@@ -27,17 +26,12 @@ public class AIStatePatten : MonoBehaviour
 
 
     public GameObject player;
-    float angleRange = 360f; // 각도범위
-    float distance = 15f; // 부채꼴(시야)의 반지름 크기.
+    public bool isCaptureEnemy;
     float AimToEnemyTime = .1f;
     float alertTime = 1f;
     int nextNode;
+
     Coroutine pathCoroutine;
-    IEnumerator AimToEnemy()
-    {
-        AimToEnemyTime -= Time.deltaTime;
-        yield return new WaitForSeconds(1f);
-    }
 
     [SerializeField] State curstate;
     private void Start()
@@ -45,19 +39,14 @@ public class AIStatePatten : MonoBehaviour
         nextNode = 0;
         ReconPositionList = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
         curstate = State.Mission;
-        targetVector = (player.transform.position - gameObject.transform.position);
         ChangeState(State.Mission);
 
     }
-    void ChangeState(State state) //상태 바꾸기
+    public void ChangeState(State state) //상태 바꾸기
     {
-        Debug.Log("AI 상태 변경");
         this.curstate = state;
         switch (curstate)
         {
-            case State.Buy:
-                Shopping();
-                break;
             case State.Mission:
                 Mission();
                 break;
@@ -67,44 +56,40 @@ public class AIStatePatten : MonoBehaviour
             case State.Battle:
                 Battle();
                 break;
-            case State.Defence:
-                Defence();
-                break;
             case State.Die:
                 Die();
                 break;
         }
     }
 
-    void Shopping() //상점에서 무기를 구매함.
-    {
-        //가장 무기가 비싼 것부터 고르고, 남은 돈으로 그 다음으로 비싼 것을 고른다.
-    }
+    //void Shopping() //상점에서 무기를 구매함.
+    //{
+    //    //가장 무기가 비싼 것부터 고르고, 남은 돈으로 그 다음으로 비싼 것을 고른다.
+    //}
     void Battle() //교전 상태.
     {
+        StopCoroutine(pathCoroutine);
         gameObject.GetComponent<AI>().movespeed = 0;
-
-        Vector2 targetVector = (player.transform.position - gameObject.transform.position);
-        transform.up = (targetVector).normalized;
-        if (targetVector.sqrMagnitude < distance * distance)
+        StartCoroutine(AimFire());
+    }
+    IEnumerator AimFire()
+    {
+        while (isCaptureEnemy)
         {
-            AimandFire = StartCoroutine(AimToEnemy());
-            if (AimToEnemyTime <= 0)
+            Vector2 targetVector = (player.transform.position - transform.position);
+            transform.up = (targetVector).normalized;
+            gameObject.GetComponent<AI>().Fire();
+            if (gameObject.GetComponent<AI>().weaponmanager.curweapon.magazine <= 0)
             {
-                StopCoroutine(AimandFire);
-                gameObject.GetComponent<AI>().Fire();
-                if (gameObject.GetComponent<AI>().weaponmanager.curweapon.magazine <= 0)
-                {
-                    gameObject.GetComponent<AI>().Reload(gameObject.GetComponent<AI>().weaponmanager.curweapon);
-                }
+                gameObject.GetComponent<AI>().Reload(gameObject.GetComponent<AI>().weaponmanager.curweapon);
             }
-            ChangeState(State.Alert);
-
+            yield return null;
         }
     }
+
     void Mission()
     {
-        gameObject.GetComponent<AI>().movespeed = 7f;
+        gameObject.GetComponent<AI>().movespeed = 0.3f;
 
         //현재 목표 경로가 없을 경우
         if (MissionNodeTrack == null)
@@ -122,14 +107,6 @@ public class AIStatePatten : MonoBehaviour
         else
         {
             pathCoroutine = StartCoroutine(AIPath());
-            if (targetVector.sqrMagnitude < distance * distance)
-            {
-                float angle = Vector2.Angle(targetVector.normalized, transform.up);
-                if (angle < angleRange)
-                {
-                    ChangeState(State.Battle);
-                }
-            }
         }
     }
 
@@ -140,7 +117,7 @@ public class AIStatePatten : MonoBehaviour
         {
             Node nextNode = MissionNodeTrack[0];
             Vector2 dir = (nextNode.worldPosition - transform.position).normalized;
-            transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
+             transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
             transform.up = dir;
 
             if (Vector2.Distance(transform.position, nextNode.worldPosition) < 2f)
@@ -152,7 +129,7 @@ public class AIStatePatten : MonoBehaviour
                     break;
                 }
                 else
-                { 
+                {
                     MissionNodeTrack.RemoveAt(0);
                 }
             }
@@ -161,16 +138,18 @@ public class AIStatePatten : MonoBehaviour
     }
     void Alert() //경계 상태.
     {
-        gameObject.GetComponent<AI>().movespeed = 2f;
+        Debug.Log("경계!");
+        gameObject.GetComponent<AI>().movespeed = 0.2f;
 
         Vector2 targetVector = (player.transform.position - gameObject.transform.position);
         Coroutine alertcoroutine = StartCoroutine(AlertTime());
-        if (targetVector.sqrMagnitude < distance * distance) //적이 다시 시야에 들어왔을 때
-        {
-            StopCoroutine(alertcoroutine);
-            ChangeState(State.Battle);
-        }
-        else if (this.alertTime <= 0f)
+
+        //if (targetVector.sqrMagnitude < distance * distance) //적이 다시 시야에 들어왔을 때
+        //{
+        //    StopCoroutine(alertcoroutine);
+        //    ChangeState(State.Battle);
+        //}
+        if (this.alertTime <= 0f)
         {
             StopCoroutine(alertcoroutine);
             ChangeState(State.Mission);
@@ -182,15 +161,16 @@ public class AIStatePatten : MonoBehaviour
     }
     void Defence() //경계 상태.
     {
-        if (targetVector.sqrMagnitude < distance * distance)
-        {
-            float angle = Vector2.Angle(targetVector.normalized, transform.up);
+        Debug.Log("방어!");
+        //if (targetVector.sqrMagnitude < distance * distance)
+        //{
+        //    float angle = Vector2.Angle(targetVector.normalized, transform.up);
 
-            if (angle < angleRange)
-            {
-                ChangeState(State.Battle);
-            }
-        }
+        //    if (angle < angleRange)
+        //    {
+        //        ChangeState(State.Battle);
+        //    }
+        //}
     }
     void Die() //사망 상태
     {

@@ -1099,6 +1099,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1735309247287616221}
   - component: {fileID: 3278545492832557840}
+  - component: {fileID: 664162557234826715}
   m_Layer: 0
   m_Name: EnemyDectector
   m_TagString: Untagged
@@ -1150,12 +1151,25 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 10
+--- !u!114 &664162557234826715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3598465173132485822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7fa5216f1bf7e1478df3013607b24b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aIStatePatten: {fileID: 4274740903092909341}
 --- !u!1 &3627700489187143744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,7 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c485dee826c315b4ea06c4fa2f993a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T: 1
+  T: 0
   Team: 
   hp: 100
   ap: 0
@@ -2076,6 +2090,7 @@ MonoBehaviour:
   FindEnemyNodeListParent: {fileID: 0}
   pathfinder: {fileID: 8142461299216830420}
   player: {fileID: 0}
+  curstate: 0
 --- !u!1 &5657834329308963376
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class EnemyDectector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] AIStatePatten aIStatePatten;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.GetComponent<Player>())
+        {
+            aIStatePatten.isCaptureEnemy = true; 
+            aIStatePatten.player = collision.gameObject;
+            aIStatePatten.ChangeState(AIStatePatten.State.Battle);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Player>())
+        {
+            aIStatePatten.isCaptureEnemy = false;
+            aIStatePatten.ChangeState(AIStatePatten.State.Mission);
+        }
     }
 }

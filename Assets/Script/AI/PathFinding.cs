@@ -14,7 +14,7 @@ public class PathFinding : MonoBehaviour
     }
     public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        Node startNode = grid.NodeFromWorldPoint(startPos); //시작 노드 
+        Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
         List<Node> openSet = new List<Node>(); //방문해야할 노드들
         List<Node> visited = new List<Node>(); //방문한 노드들
