@@ -32,6 +32,7 @@ public class AIStatePatten : MonoBehaviour
     float AimToEnemyTime = .1f;
     float alertTime = 1f;
     int nextNode;
+    Coroutine pathCoroutine;
     IEnumerator AimToEnemy()
     {
         AimToEnemyTime -= Time.deltaTime;
@@ -108,9 +109,8 @@ public class AIStatePatten : MonoBehaviour
         //현재 목표 경로가 없을 경우
         if (MissionNodeTrack == null)
         {
-            Debug.Log("길 없");
             int RandomNode = Mathf.RoundToInt(Random.Range(0, ReconPositionList.Count - 1));
-            Debug.Log($"RandomNode : {RandomNode}");
+
             if (Vector2.Distance(transform.position, (Vector2)ReconPositionList[RandomNode].position) < 0.5f)
             {
                 return;
@@ -121,8 +121,7 @@ public class AIStatePatten : MonoBehaviour
         }
         else
         {
-            Debug.Log("길 있");
-            AIPath(MissionNodeTrack);
+            pathCoroutine = StartCoroutine(AIPath());
             if (targetVector.sqrMagnitude < distance * distance)
             {
                 float angle = Vector2.Angle(targetVector.normalized, transform.up);
@@ -134,27 +133,31 @@ public class AIStatePatten : MonoBehaviour
         }
     }
 
-    void AIPath(List<Node> nodeList)
+
+    IEnumerator AIPath()
     {
-        while (nodeList != null && nodeList.Count > 0)
+        while (MissionNodeTrack != null && MissionNodeTrack.Count > 0)
         {
-            Node next = nodeList[0];
-            Vector2 dir = (next.worldPosition - transform.position).normalized;
+            Node nextNode = MissionNodeTrack[0];
+            Vector2 dir = (nextNode.worldPosition - transform.position).normalized;
             transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
             transform.up = dir;
 
-            if (Vector2.Distance(gameObject.transform.position, next.worldPosition) < 2f)
+            if (Vector2.Distance(transform.position, nextNode.worldPosition) < 2f)
             {
-                if (next == nodeList[nodeList.Count - 1]) //nodeList의 목표 지점 도착
+                if (MissionNodeTrack.Count <= 1)
                 {
-                    ChangeState(State.Alert);
-                    nodeList.RemoveAt(0);
-                    return;
+                    MissionNodeTrack = null;
+                    ChangeState(State.Mission);
+                    break;
                 }
-                nodeList.RemoveAt(0);
+                else
+                { 
+                    MissionNodeTrack.RemoveAt(0);
+                }
             }
+            yield return null;
         }
-
     }
     void Alert() //경계 상태.
     {
