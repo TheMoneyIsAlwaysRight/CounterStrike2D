@@ -8,28 +8,6 @@ using UnityEngine.U2D;
 
 public class AIStatePatten : MonoBehaviour
 {
-    [SerializeField] PathFinding pathfinder;
-    float AimToEnemyTime = .1f;
-    int nextNode;
-    float alertTime = 1f;
-    Coroutine AimandFire;
-    [SerializeField] GameObject FindEnemyNodeListParent; //적군 정찰 노드 리스트
-    Vector2 targetVector;
-
-    List<Node> MissionNodeTrack;
-    List<Transform> ReconPositionList;
-    List<Node> ForReconPositionNodeTrack;
-    [SerializeField]bool IsRecon;
-    
-    
-    public GameObject player;
-    IEnumerator AimToEnemy()
-    {
-        AimToEnemyTime -= Time.deltaTime;
-        yield return new WaitForSeconds(1f);
-    }
-    float angleRange = 360f; // 각도범위
-    float distance = 15f; // 부채꼴(시야)의 반지름 크기.
     enum State //Ai의 상태 패턴
     {
         shopping,
@@ -40,9 +18,32 @@ public class AIStatePatten : MonoBehaviour
         recon,
         defence
     }
-    State curstate;
-    bool IspathFind = false;
 
+    [SerializeField] GameObject FindEnemyNodeListParent; //적군 정찰 노드 리스트
+    [SerializeField] PathFinding pathfinder;
+    
+    Coroutine AimandFire;
+    Vector2 targetVector;
+
+    List<Node> MissionNodeTrack;
+    List<Transform> ReconPositionList;
+    List<Node> ForReconPositionNodeTrack;
+    
+    
+    public GameObject player;
+    float angleRange = 360f; // 각도범위
+    float distance = 15f; // 부채꼴(시야)의 반지름 크기.
+    float AimToEnemyTime = .1f;
+    float alertTime = 1f;
+    int nextNode;
+    bool IspathFind = false;
+    IEnumerator AimToEnemy()
+    {
+        AimToEnemyTime -= Time.deltaTime;
+        yield return new WaitForSeconds(1f);
+    }
+
+    State curstate;
     private void Start()
     {
         curstate = State.mission;
@@ -52,10 +53,10 @@ public class AIStatePatten : MonoBehaviour
         targetVector = (player.transform.position - gameObject.transform.position);
 
     }
-    private void Update()
-    {
-      AIWeaponPatten();
-    }
+    //private void Update()
+    //{
+    //    AISwapWeapon();
+    //}
 
     private void FixedUpdate()
     {
@@ -105,7 +106,6 @@ public class AIStatePatten : MonoBehaviour
                 gameObject.GetComponent<AI>().Fire();
                 if (gameObject.GetComponent<AI>().weaponmanager.curweapon.magazine <= 0)
                 {
-                    //Debug.Log("적이 재장전 중...");
                     gameObject.GetComponent<AI>().Reload(gameObject.GetComponent<AI>().weaponmanager.curweapon);
                 }
             }
@@ -159,7 +159,10 @@ public class AIStatePatten : MonoBehaviour
             Node next = nodeList[0];
 
             Vector2 dir = (next.worldPosition - transform.position).normalized;
+
             transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
+            transform.up = dir;
+
             if (Vector2.Distance(gameObject.transform.position, next.worldPosition) < 2f)
             {
                 if (next == nodeList[nodeList.Count - 1]) //nodeList의 목표 지점 도착
@@ -173,38 +176,6 @@ public class AIStatePatten : MonoBehaviour
         }
 
     }
-    //void Recon()
-    //{
-    //    gameObject.GetComponent<AI>().movespeed = 7f;
-
-    //    if (!IspathFind)
-    //    {
-    //        int RandomNode = Mathf.RoundToInt(Random.Range(0, ReconPositionList.Count - 1));
-    //        if (Vector2.Distance(transform.position,(Vector2)ReconPositionList[RandomNode].position) < 0.5f)
-    //        {
-    //            return;
-    //        }
-    //        ForReconPositionNodeTrack = pathfinder.FindPath(transform.position, (Vector2)ReconPositionList[RandomNode].position);
-    //        IspathFind = true;
-    //    }
-    //    else
-    //    {
-    //        AIPath(ForReconPositionNodeTrack);
-
-    //        if (targetVector.sqrMagnitude < distance * distance)
-    //        {
-    //            float angle = Vector2.Angle(targetVector.normalized, transform.up);
-
-    //            if (angle < angleRange)
-    //            {
-    //                ChangeState(State.battle);
-    //                IspathFind = false;
-
-    //            }
-    //        }
-    //    }
-
-    //}
     void Alert() //경계 상태.
     {
         gameObject.GetComponent<AI>().movespeed = 2f;
@@ -248,7 +219,7 @@ public class AIStatePatten : MonoBehaviour
         this.alertTime -= Time.deltaTime;
         yield return new WaitForSeconds(0.1f);
     }
-    void AIWeaponPatten()
+    void AISwapWeapon()
     {
         if (gameObject.GetComponent<AI>().weaponmanager.HAND[0] == null)
         {
