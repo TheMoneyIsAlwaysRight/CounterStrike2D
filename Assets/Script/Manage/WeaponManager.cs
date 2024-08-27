@@ -9,18 +9,19 @@ using UnityEngine.XR;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] Human user;
-    [SerializeField] public Weapon[] HAND = new Weapon[5]; //현재 가진 무기 목록
-    [SerializeField] public Dictionary<int, Weapon> WeaponInfo = new Dictionary<int, Weapon>(); // 모든 무기는 무기번호로 지정됨.
+    
     [SerializeField] GameObject droppoint;
-    [SerializeField] public Weapon curweapon; //현재 무기
-    [SerializeField] public Weapon prevweapon;
     [SerializeField] GameObject BuyMenu;
-    [SerializeField] public bool CanIPlantBomb;
-    [SerializeField] public bool IsBuyCant;
+    [SerializeField] Human user;
+    
+    public Weapon[] HAND = new Weapon[5]; //현재 가진 무기 목록
+    public Dictionary<int, Weapon> WeaponInfo = new Dictionary<int, Weapon>(); // 모든 무기는 무기번호로 지정됨.
+    public Weapon curweapon; //현재 무기
+    public Weapon prevweapon;
+    public bool CanIPlantBomb;
+    public bool IsBuyCant;
 
     bool weaponcooltime;
-
 
     Coroutine firecoroutine;
     Coroutine reloadcoroutine;
@@ -32,13 +33,15 @@ public class WeaponManager : MonoBehaviour
         {
             WeaponInfo.Add(Weapons[x].GetComponent<Weapon>().weaponnumber, Weapons[x]);
         }
+
         foreach (Weapon a in gameObject.GetComponentsInChildren<Weapon>()) //모든 무기 비활성화
         {
             a.gameObject.SetActive(false);
         }
+
         HAND[2] = WeaponInfo[50]; // weapon number 50 -> knife
         curweapon = HAND[2];
-        user.audiosource.clip = curweapon.FireSound;
+        //user.audiosource.clip = curweapon.FireSound;
 
     }
     void Start()
@@ -101,7 +104,6 @@ public class WeaponManager : MonoBehaviour
     {
         if(curweapon == HAND[2])
         {
-            Debug.Log("칼 무기는 버릴 수 없습니다.");
             return;
         }
         if (curweapon != prevweapon)

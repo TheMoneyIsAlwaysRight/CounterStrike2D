@@ -9,7 +9,6 @@ using UnityEngine.U2D;
 public class AIStatePatten : MonoBehaviour
 {
     [SerializeField] PathFinding pathfinder;
-    [SerializeField] GameObject Enemy;
     float AimToEnemyTime = .1f;
     int nextNode;
     float alertTime = 1f;
@@ -22,6 +21,8 @@ public class AIStatePatten : MonoBehaviour
     List<Node> ForReconPositionNodeTrack;
     [SerializeField]bool IsRecon;
     
+    
+    public GameObject player;
     IEnumerator AimToEnemy()
     {
         AimToEnemyTime -= Time.deltaTime;
@@ -44,14 +45,11 @@ public class AIStatePatten : MonoBehaviour
 
     private void Start()
     {
-        //curstate = State.shopping;
         curstate = State.mission;
         nextNode = 0;
-
         ReconPositionList = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
         curstate = State.mission;
-
-        targetVector = (Enemy.transform.position - gameObject.transform.position);
+        targetVector = (player.transform.position - gameObject.transform.position);
 
     }
     private void Update()
@@ -96,7 +94,7 @@ public class AIStatePatten : MonoBehaviour
     {
         gameObject.GetComponent<AI>().movespeed = 0;
 
-        Vector2 targetVector = (Enemy.transform.position - gameObject.transform.position);
+        Vector2 targetVector = (player.transform.position - gameObject.transform.position);
         transform.up = (targetVector).normalized;
         if (targetVector.sqrMagnitude<distance*distance)
         {
@@ -211,7 +209,7 @@ public class AIStatePatten : MonoBehaviour
     {
         gameObject.GetComponent<AI>().movespeed = 2f;
 
-        Vector2 targetVector = (Enemy.transform.position - gameObject.transform.position);
+        Vector2 targetVector = (player.transform.position - gameObject.transform.position);
         Coroutine alertcoroutine = StartCoroutine(AlertTime());
         if (targetVector.sqrMagnitude < distance * distance) //적이 다시 시야에 들어왔을 때
         {
