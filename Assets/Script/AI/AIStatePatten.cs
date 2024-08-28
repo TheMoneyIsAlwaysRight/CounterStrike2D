@@ -68,10 +68,14 @@ public class AIStatePatten : MonoBehaviour
         {
             Vector2 targetVector = (player.transform.position - transform.position);
             transform.up = (targetVector).normalized;
+
             gameObject.GetComponent<AI>().Fire();
-            if (gameObject.GetComponent<AI>().weaponmanager.curweapon.magazine <= 0)
+            if (gameObject.GetComponent<AI>().
+                weaponmanager.curweapon.magazine <= 0)
             {
-                gameObject.GetComponent<AI>().Reload(gameObject.GetComponent<AI>().weaponmanager.curweapon);
+                gameObject.GetComponent<AI>().
+                    Reload(gameObject.GetComponent<AI>().
+                    weaponmanager.curweapon);
             }
             yield return null;
         }
