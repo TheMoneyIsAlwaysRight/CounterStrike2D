@@ -171,7 +171,7 @@ public class WeaponManager : MonoBehaviour
             curweapon.gameObject.SetActive(true);
         }
 
-        user.audiosource.clip = swapweapon.FireSound;
+        //user.audiosource.clip = swapweapon.FireSound;
 
     }
 

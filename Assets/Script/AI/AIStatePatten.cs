@@ -32,7 +32,7 @@ public class AIStatePatten : MonoBehaviour
     int nextNode;
 
     Coroutine pathCoroutine;
-
+    Coroutine aim;
     [SerializeField] State curstate;
     private void Start()
     {
@@ -49,9 +49,6 @@ public class AIStatePatten : MonoBehaviour
         {
             case State.Mission:
                 Mission();
-                break;
-            case State.Alert:
-                Alert();
                 break;
             case State.Battle:
                 Battle();
@@ -70,7 +67,7 @@ public class AIStatePatten : MonoBehaviour
     {
         StopCoroutine(pathCoroutine);
         gameObject.GetComponent<AI>().movespeed = 0;
-        StartCoroutine(AimFire());
+        aim = StartCoroutine(AimFire());
     }
     IEnumerator AimFire()
     {
@@ -89,8 +86,9 @@ public class AIStatePatten : MonoBehaviour
 
     void Mission()
     {
-        gameObject.GetComponent<AI>().movespeed = 0.3f;
-
+        aim = null;
+        gameObject.GetComponent<AI>().movespeed = 10f;
+        gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
         //현재 목표 경로가 없을 경우
         if (MissionNodeTrack == null)
         {
@@ -139,16 +137,11 @@ public class AIStatePatten : MonoBehaviour
     void Alert() //경계 상태.
     {
         Debug.Log("경계!");
-        gameObject.GetComponent<AI>().movespeed = 0.2f;
+        gameObject.GetComponent<AI>().movespeed = 10f;
 
         Vector2 targetVector = (player.transform.position - gameObject.transform.position);
         Coroutine alertcoroutine = StartCoroutine(AlertTime());
 
-        //if (targetVector.sqrMagnitude < distance * distance) //적이 다시 시야에 들어왔을 때
-        //{
-        //    StopCoroutine(alertcoroutine);
-        //    ChangeState(State.Battle);
-        //}
         if (this.alertTime <= 0f)
         {
             StopCoroutine(alertcoroutine);

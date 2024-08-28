@@ -112,7 +112,7 @@ public class Human : MonoBehaviour, IDamagable
             }
             curweapon.magazine--;
             animator.SetBool("Fire", false);
-            audiosource.Play();
+            //audiosource.Play();
         }
 
     }

@@ -34,7 +34,7 @@ public class Grid : MonoBehaviour
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
                 grid[x,y] =new Node(walkable, worldPoint, x, y);
-               // Debug.Log($"{grid[x, y].worldPosition.x},{grid[x, y].worldPosition.y}에 {walkable}한 노드 [{x},{y}]생성됨.");
+             
             }
         }
     }
@@ -44,13 +44,11 @@ public class Grid : MonoBehaviour
         float percentX = (worldPosition.x - worldBottomLeft.x) / gridWorldSize.x;
         float percentY = (worldPosition.y - worldBottomLeft.y) / gridWorldSize.y;
 
-        //Debug.Log($"그리드 왼쪽 최하위 기준으로 약 {percentX*100}%,{percentY*100}%");
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
-        //Debug.Log($"이 캐릭터의 위치는 그리드로 표현된 노드 상으로는 {x},{y}");
         return grid[x, y];
     }
 
