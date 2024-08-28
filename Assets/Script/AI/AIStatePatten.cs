@@ -38,9 +38,8 @@ public class AIStatePatten : MonoBehaviour
     {
         nextNode = 0;
         ReconPositionList = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
-        curstate = State.Mission;
-        ChangeState(State.Mission);
 
+        ChangeState(State.Mission);
     }
     public void ChangeState(State state) //상태 바꾸기
     {
@@ -65,7 +64,10 @@ public class AIStatePatten : MonoBehaviour
     //}
     void Battle() //교전 상태.
     {
-        StopCoroutine(pathCoroutine);
+        if (pathCoroutine != null)
+        {
+            StopCoroutine(pathCoroutine);
+        }
         gameObject.GetComponent<AI>().movespeed = 0;
         aim = StartCoroutine(AimFire());
     }
@@ -99,6 +101,7 @@ public class AIStatePatten : MonoBehaviour
                 return;
             }
             MissionNodeTrack = pathfinder.FindPath(transform.position, (Vector2)ReconPositionList[RandomNode].position);
+            
             nextNode = 0;
             ChangeState(State.Mission);
         }
@@ -190,16 +193,4 @@ public class AIStatePatten : MonoBehaviour
             gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
         }
     }
-    List<Node> CalculatePath()
-    {
-        List<Node> list = pathfinder.FindPath(transform.position, targetVector);
-
-        if (list == null)
-        {
-            Debug.Log("경로 파악 불가");
-        }
-        return list;
-
-    }
-
 }

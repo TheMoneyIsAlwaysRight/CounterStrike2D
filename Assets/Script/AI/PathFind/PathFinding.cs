@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathFinding : MonoBehaviour
 {
+    List<Node> openSet = new List<Node>(); //방문해야할 노드들
+    List<Node> visited = new List<Node>(); //방문한 노드들
 
     //Method : A* 알고리즘 이용한 경로 찾기
     public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
+        if(Grid.Inst.nodeArray == null)
+        { Debug.LogError($"NodeArray is NULL");
+            return null;
+        }
         Node startNode = Grid.Inst.NodeFromWorldPoint(startPos);
         Node targetNode = Grid.Inst.NodeFromWorldPoint(targetPos);
-        List<Node> openSet = new List<Node>(); //방문해야할 노드들
-        List<Node> visited = new List<Node>(); //방문한 노드들
+
+        openSet.Clear(); //방문해야할 노드들
+        visited.Clear(); //방문한 노드들
         openSet.Add(startNode);
         while (openSet.Count > 0)
         {
@@ -93,7 +99,7 @@ public class PathFinding : MonoBehaviour
     {
         int gridSizeX = Grid.Inst.gridSizeX;
         int gridSizeY = Grid.Inst.gridSizeY;
-        Node[,] grid = Grid.Inst.grid;
+        Node[,] grid = Grid.Inst.nodeArray;
 
         List<Node> neighbors = new List<Node>();
         for (int x = -1; x <= 1; x++)
@@ -116,4 +122,30 @@ public class PathFinding : MonoBehaviour
         }
         return neighbors;
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
+
+    //    if (grid != null)
+    //    {
+    //        foreach (Node n in grid)
+    //        {
+    //            Gizmos.color = (n.walkable) ? Color.white : Color.red;
+    //            if (path != null)
+    //            {
+    //                if (path.Contains(n))
+    //                {
+    //                    Gizmos.color = Color.black;
+    //                }
+    //            }
+    //            else
+    //            {
+    //            }
+    //            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
+
+    //        }
+    //    }
+    //}
 }
