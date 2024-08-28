@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         CountSurvivor();
     }
@@ -66,7 +67,9 @@ public class GameManager : MonoBehaviour
    public static void GamePause()
    {
         Time.timeScale = 0f;
-   }
+        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
+    }
    public static void GameResume()
    {
         Time.timeScale = 1f;

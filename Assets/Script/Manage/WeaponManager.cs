@@ -128,6 +128,8 @@ public class WeaponManager : MonoBehaviour
     void OnBomb(InputValue button) { if (HAND[4] != null) { ChangeWeapon(HAND[4]); } }
     void OnBuyMenu(InputValue button)
     {
+        if (GetComponentInParent<AI>()) { return; }
+
         if (IsBuyCant)
         {
             if (BuyMenu.activeSelf == true)
@@ -141,7 +143,7 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("상점 지역이 아닙니다.");
+            BuyMenu.SetActive(false);
         }
     }
 
@@ -190,7 +192,6 @@ public class WeaponManager : MonoBehaviour
                 }
                 else if (HAND[purchaseweapon.weaponstyle] == purchaseweapon)
                 {
-                    Debug.Log("같은 무기를 사려했습니다.");
                     return;
                 }
 
