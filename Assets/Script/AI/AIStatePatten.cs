@@ -108,24 +108,29 @@ public class AIStatePatten : MonoBehaviour
         }
     }
 
-
+    //Coroutine : AI가 A* 알고리즘으로 생성된 경로를 따라 움직이는 코루틴.
     IEnumerator AIPath()
     {
-        while (MissionNodeTrack != null && MissionNodeTrack.Count > 0)
+        while (MissionNodeTrack.Count > 0)
         {
+            //생성된 경로의 맨 앞 정점을 바라보며 이동.
             Node nextNode = MissionNodeTrack[0];
             Vector2 dir = (nextNode.worldPosition - transform.position).normalized;
-             transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
+            transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
             transform.up = dir;
 
+            //경로 상의 정점들을 도달할 때
             if (Vector2.Distance(transform.position, nextNode.worldPosition) < 2f)
             {
+                //남은 경로가 없을 경우. 즉 경로의 끝에 도달한 경우.
                 if (MissionNodeTrack.Count <= 1)
                 {
+                    //경로를 Null 및 다음 경로를 가도록하기 위해, 임무 수행 상태로 재지정.
                     MissionNodeTrack = null;
                     ChangeState(State.Mission);
                     break;
                 }
+                //남은 경로가 있다면, 다음 경로의 정점으로 이동하도록, 맨 앞 경로 요소를 제거.
                 else
                 {
                     MissionNodeTrack.RemoveAt(0);
@@ -136,7 +141,6 @@ public class AIStatePatten : MonoBehaviour
     }
     void Alert() //경계 상태.
     {
-        Debug.Log("경계!");
         gameObject.GetComponent<AI>().movespeed = 10f;
 
         Vector2 targetVector = (player.transform.position - gameObject.transform.position);
