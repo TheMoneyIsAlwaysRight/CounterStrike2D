@@ -20,8 +20,8 @@ public class AIStatePatten : MonoBehaviour
 
     Vector2 targetVector;
 
-    List<Node> MissionNodeTrack;
-    List<Transform> ReconPositionList;
+    List<Node> curPath;
+    List<Transform> patrolSpot;
     List<Node> ForReconPositionNodeTrack;
 
 
@@ -32,12 +32,12 @@ public class AIStatePatten : MonoBehaviour
     int nextNode;
 
     Coroutine pathCoroutine;
-    Coroutine aim;
+    Coroutine aimCoroutine;
     [SerializeField] State curstate;
     private void Start()
     {
         nextNode = 0;
-        ReconPositionList = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
+        patrolSpot = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
 
         ChangeState(State.Mission);
     }
@@ -62,15 +62,6 @@ public class AIStatePatten : MonoBehaviour
     //{
     //    //가장 무기가 비싼 것부터 고르고, 남은 돈으로 그 다음으로 비싼 것을 고른다.
     //}
-    void Battle() //교전 상태.
-    {
-        if (pathCoroutine != null)
-        {
-            StopCoroutine(pathCoroutine);
-        }
-        gameObject.GetComponent<AI>().movespeed = 0;
-        aim = StartCoroutine(AimFire());
-    }
     IEnumerator AimFire()
     {
         while (isCaptureEnemy)
@@ -85,39 +76,58 @@ public class AIStatePatten : MonoBehaviour
             yield return null;
         }
     }
-
     void Mission()
     {
-        aim = null;
+        aimCoroutine = null;
         gameObject.GetComponent<AI>().movespeed = 10f;
         gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
-        //현재 목표 경로가 없을 경우
-        if (MissionNodeTrack == null)
-        {
-            int RandomNode = Mathf.RoundToInt(Random.Range(0, ReconPositionList.Count - 1));
 
-            if (Vector2.Distance(transform.position, (Vector2)ReconPositionList[RandomNode].position) < 0.5f)
+        //현재 목표 경로가 없을 경우, 경로 추출.
+        if (curPath == null)
+        {
+            //순찰 지점들 중 랜덤으로 한 지점을 선택
+            int RandomNode = 
+            Mathf.RoundToInt(Random.Range(0,patrolSpot.Count-1));
+
+            //현재 지점과 목표 지점의 간의 경로 추출
+            if (Vector2.Distance(transform.position,
+               (Vector2)patrolSpot[RandomNode].position) < 0.5f)
             {
                 return;
             }
-            MissionNodeTrack = pathfinder.FindPath(transform.position, (Vector2)ReconPositionList[RandomNode].position);
-            
+            curPath = 
+                pathfinder.FindPath(transform.position,
+                (Vector2)patrolSpot[RandomNode].position);
+            //임무 수행 상태로 재지정
             nextNode = 0;
             ChangeState(State.Mission);
         }
-        else
+        else //경로가 있다면, 경로 따라가기 로직 실행.
         {
             pathCoroutine = StartCoroutine(AIPath());
         }
     }
+    void Battle() //교전 상태.
+    {
+        if (pathCoroutine != null)
+        {
+            StopCoroutine(pathCoroutine);
+        }
+        gameObject.GetComponent<AI>().movespeed = 0;
+        aimCoroutine = StartCoroutine(AimFire());
+    }
+    void Die() //사망 상태
+    {
+    }
+
 
     //Coroutine : AI가 A* 알고리즘으로 생성된 경로를 따라 움직이는 코루틴.
     IEnumerator AIPath()
     {
-        while (MissionNodeTrack.Count > 0)
+        while (curPath.Count > 0)
         {
             //생성된 경로의 맨 앞 정점을 바라보며 이동.
-            Node nextNode = MissionNodeTrack[0];
+            Node nextNode = curPath[0];
             Vector2 dir = (nextNode.worldPosition - transform.position).normalized;
             transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
             transform.up = dir;
@@ -126,17 +136,17 @@ public class AIStatePatten : MonoBehaviour
             if (Vector2.Distance(transform.position, nextNode.worldPosition) < 2f)
             {
                 //남은 경로가 없을 경우. 즉 경로의 끝에 도달한 경우.
-                if (MissionNodeTrack.Count <= 1)
+                if (curPath.Count <= 1)
                 {
                     //경로를 Null 및 다음 경로를 가도록하기 위해, 임무 수행 상태로 재지정.
-                    MissionNodeTrack = null;
+                    curPath = null;
                     ChangeState(State.Mission);
                     break;
                 }
                 //남은 경로가 있다면, 다음 경로의 정점으로 이동하도록, 맨 앞 경로 요소를 제거.
                 else
                 {
-                    MissionNodeTrack.RemoveAt(0);
+                    curPath.RemoveAt(0);
                 }
             }
             yield return null;
@@ -172,10 +182,6 @@ public class AIStatePatten : MonoBehaviour
         //    }
         //}
     }
-    void Die() //사망 상태
-    {
-    }
-
     IEnumerator AlertTime()
     {
         this.alertTime -= Time.deltaTime;
