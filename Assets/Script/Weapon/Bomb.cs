@@ -20,7 +20,7 @@ public class BOMB : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && transform.parent.gameObject.GetComponent<WeaponManager>().CanIPlantBomb == true)
+        if (Input.GetKey(KeyCode.Mouse0) && transform.parent.gameObject.GetComponent<Inventory_Manager>().CanIPlantBomb == true)
         {
             if (!IsPlanted && PlantingTime <= 0)
             {
@@ -28,7 +28,7 @@ public class BOMB : MonoBehaviour
                 Instantiate(PlantedBomb, transform.position, transform.rotation);
                 gameObject.SetActive(false);
 
-                transform.parent.GetComponent<WeaponManager>().BombPlanted();
+                transform.parent.GetComponent<Inventory_Manager>().BombPlanted();
 
                 BombHUD.SetActive(true);
                 IsPlanted = true;

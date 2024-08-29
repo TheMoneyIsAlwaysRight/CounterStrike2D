@@ -66,16 +66,15 @@ public class AIStatePatten : MonoBehaviour
     {
         while (isCaptureEnemy)
         {
+            //목표를 똑바로 바라보기.
             Vector2 targetVector = (player.transform.position - transform.position);
             transform.up = (targetVector).normalized;
-
+            
+            // 사격하되,탄약이 떨어지면 재장전 함수 호출.
             gameObject.GetComponent<AI>().Fire();
-            if (gameObject.GetComponent<AI>().
-                weaponmanager.curweapon.magazine <= 0)
+            if (gameObject.GetComponent<AI>(). weaponmanager.curweapon.magazine <= 0)
             {
-                gameObject.GetComponent<AI>().
-                    Reload(gameObject.GetComponent<AI>().
-                    weaponmanager.curweapon);
+                gameObject.GetComponent<AI>().Reload(gameObject.GetComponent<AI>().weaponmanager.curweapon);
             }
             yield return null;
         }

@@ -14,7 +14,7 @@ public class item : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player>())
         {
-            collision.gameObject.GetComponent<Player>().GetComponentInChildren<WeaponManager>().PickUpWeapon(gameObject);
+            collision.gameObject.GetComponent<Player>().GetComponentInChildren<Inventory_Manager>().PickUpWeapon(gameObject);
         }
     }
 }

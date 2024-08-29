@@ -6,7 +6,7 @@ using UnityEngine;
 public class FIRETRACKING : MonoBehaviour
 {
     Coroutine firetrackcoroutine;
-    [SerializeField] WeaponManager weaponManager;
+    [SerializeField] Inventory_Manager weaponManager;
 
 
     private void OnEnable()

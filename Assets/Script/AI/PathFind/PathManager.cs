@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class PathManager : MonoBehaviour
 {
-    static Grid instance;
-    public static Grid Inst { get { return instance; } }
+    static PathManager instance;
+    public static PathManager Inst { get { return instance; } }
 
     [Header("이동 불가능 지역의 레이어 마스크")]
     public LayerMask unwalkableMask; //지나갈 수 없는 지역을 나타내는 레이어마스크
@@ -58,9 +58,9 @@ public class Grid : MonoBehaviour
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
 
-        for (int a = 0;a < nodeArray.GetLength(0); a++)
+        for (int a = 0; a < nodeArray.GetLength(0); a++)
         {
-            for(int b= 0; b<nodeArray.GetLength(1);b++)
+            for (int b = 0; b < nodeArray.GetLength(1); b++)
             {
                 if (a == x && y == b)
                 {
@@ -72,30 +72,32 @@ public class Grid : MonoBehaviour
         Debug.Log("오류");
         return null;
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
 
-    //    if (grid != null)
-    //    {
-    //        foreach (Node n in grid)
-    //        {
-    //            Gizmos.color = (n.walkable) ? Color.white : Color.red;
-    //            if (path != null)
-    //            {
-    //                if (path.Contains(n))
-    //                {
-    //                    Gizmos.color = Color.black;
-    //                }
-    //            }
-    //            else
-    //            {
-    //            }
-    //            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
 
-    //        }
-    //    }
-    //}
+        if (nodeArray != null)
+        {
+            foreach (Node n in nodeArray)
+            {
+                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                if (path != null)
+                {
+                    if (path.Contains(n))
+                    {
+                        Gizmos.color = Color.black;
+                    }
+                }
+                else
+                {
+                }
+                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
 
+            }
+        }
+        //}
+
+    }
 }

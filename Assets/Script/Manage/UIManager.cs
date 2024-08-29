@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text maxammo;
     [SerializeField] TMP_Text magazine;
     //[SerializeField] TMP_Text Curweapon;
-    [SerializeField] WeaponManager playerweaponManager;
+    [SerializeField] Inventory_Manager playerweaponManager;
     [SerializeField] Player player;
     void FixedUpdate()
     {       

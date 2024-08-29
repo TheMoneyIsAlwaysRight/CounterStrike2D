@@ -18,7 +18,7 @@ public class Human : MonoBehaviour, IDamagable
     [SerializeField] Animator animator;
     [SerializeField] GameObject FireFlash;
     [SerializeField] GameObject FireFlash2;
-    [SerializeField] public WeaponManager weaponmanager;
+    [SerializeField] public Inventory_Manager weaponmanager;
     [SerializeField] AudioClip reloadsound;
     [SerializeField] AudioClip reloadsound2;
     [SerializeField] public AudioSource audiosource;
@@ -77,17 +77,17 @@ public class Human : MonoBehaviour, IDamagable
 
     public void Fire()
     {
-        Weapon curweapon = transform.gameObject.GetComponentInChildren<WeaponManager>().curweapon;
+        Weapon curweapon = transform.gameObject.GetComponentInChildren<Inventory_Manager>().curweapon;
         if (IsRecoil)
         { //¹ß»ç ÄðÅ¸ÀÓ µ¿¾È Á¦¿Ü
             return;
         }
         recoilcoroutine = StartCoroutine(RecoilCoroutine());
-        if(curweapon == transform.gameObject.GetComponentInChildren<WeaponManager>().HAND[4])
+        if(curweapon == transform.gameObject.GetComponentInChildren<Inventory_Manager>().HAND[4])
         { //ÆøÅº Á¦¿Ü
             return;
         }
-        if (curweapon == transform.gameObject.GetComponentInChildren<WeaponManager>().HAND[2])
+        if (curweapon == transform.gameObject.GetComponentInChildren<Inventory_Manager>().HAND[2])
         {
             animator.SetBool("Knife", true);
             Vector3 fireDir = transform.up;

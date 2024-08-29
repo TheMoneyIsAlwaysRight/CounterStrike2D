@@ -7,18 +7,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
-public class WeaponManager : MonoBehaviour
+public class Inventory_Manager : MonoBehaviour
 {
     
     [SerializeField] GameObject droppoint;
     [SerializeField] GameObject BuyMenu;
     [SerializeField] Human user;
-    
+
+    [HideInInspector]
     public Weapon[] HAND = new Weapon[5]; //현재 가진 무기 목록
     public Dictionary<int, Weapon> WeaponInfo = new Dictionary<int, Weapon>(); // 모든 무기는 무기번호로 지정됨.
+    [HideInInspector]
     public Weapon curweapon; //현재 무기
+    [HideInInspector]
     public Weapon prevweapon;
+    [HideInInspector]
     public bool CanIPlantBomb;
+    [HideInInspector]
     public bool IsBuyCant;
 
     bool weaponcooltime;
@@ -157,9 +162,10 @@ public class WeaponManager : MonoBehaviour
             prevweapon = null;
             return;
         }
-
-        if (HAND[swapweapon.weaponstyle] == swapweapon) // 교체하려는 그 무기를 가지고 있었을 때만   
+        // 교체하려는 그 무기를 가지고 있었을 때만 
+        if (HAND[swapweapon.weaponstyle] == swapweapon) 
         {   prevweapon = curweapon;
+            //이전 무기 비활성화 및 새 무기 활성화.
             prevweapon.gameObject.SetActive(false);
             curweapon = swapweapon;
 

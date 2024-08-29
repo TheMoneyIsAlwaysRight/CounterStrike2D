@@ -24,7 +24,7 @@ public class Player : Human
         this.Hpcheck();
         cursor();
         gameObject.transform.Translate(moveDir * movespeed * Time.deltaTime,Space.World);
-        if(gameObject.transform.GetComponentInChildren<WeaponManager>().IsBuyCant)
+        if(gameObject.transform.GetComponentInChildren<Inventory_Manager>().IsBuyCant)
         {
             BuyLogo.SetActive(true);
         }

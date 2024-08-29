@@ -8,14 +8,14 @@ public class BombPlace : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Human>())
         {
-            collision.gameObject.transform.GetComponentInChildren<WeaponManager>().CanIPlantBomb = true;
+            collision.gameObject.transform.GetComponentInChildren<Inventory_Manager>().CanIPlantBomb = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Human>())
         {
-            collision.gameObject.transform.GetComponentInChildren<WeaponManager>().CanIPlantBomb = false;
+            collision.gameObject.transform.GetComponentInChildren<Inventory_Manager>().CanIPlantBomb = false;
         }
     }
 }
