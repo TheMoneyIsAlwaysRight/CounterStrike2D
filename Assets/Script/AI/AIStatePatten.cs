@@ -7,15 +7,12 @@ public class AIStatePatten : MonoBehaviour
 {
     public enum State //Ai의 상태 패턴
     {
-        Buy,
         Mission,
-        Alert,
         Battle,
         Die,
-        Defence
     }
 
-    [SerializeField] GameObject FindEnemyNodeListParent; //적군 정찰 노드 리스트
+    [SerializeField] GameObject PatrolSpot_Array; //적군 정찰 노드 리스트
     [SerializeField] PathFinding pathfinder;
 
     Vector2 targetVector;
@@ -34,11 +31,14 @@ public class AIStatePatten : MonoBehaviour
     Coroutine pathCoroutine;
     Coroutine aimCoroutine;
     [SerializeField] State curstate;
+
+    private void Awake()
+    {
+        patrolSpot = PatrolSpot_Array.GetComponentsInChildren<Transform>().ToList<Transform>();
+    }
     private void Start()
     {
         nextNode = 0;
-        patrolSpot = FindEnemyNodeListParent.GetComponentsInChildren<Transform>().ToList<Transform>();
-
         ChangeState(State.Mission);
     }
     public void ChangeState(State state) //상태 바꾸기
@@ -58,10 +58,6 @@ public class AIStatePatten : MonoBehaviour
         }
     }
 
-    //void Shopping() //상점에서 무기를 구매함.
-    //{
-    //    //가장 무기가 비싼 것부터 고르고, 남은 돈으로 그 다음으로 비싼 것을 고른다.
-    //}
     IEnumerator AimFire()
     {
         while (isCaptureEnemy)
@@ -89,15 +85,13 @@ public class AIStatePatten : MonoBehaviour
         if (curPath == null)
         {
             //순찰 지점들 중 랜덤으로 한 지점을 선택
-            int RandomNode = 
-            Mathf.RoundToInt(Random.Range(0,patrolSpot.Count-1));
-
+            int RandomNode = Random.Range(0,patrolSpot.Count-1);
             //현재 지점과 목표 지점의 간의 경로 추출
-            if (Vector2.Distance(transform.position,
-               (Vector2)patrolSpot[RandomNode].position) < 0.5f)
-            {
-                return;
-            }
+            //if (Vector2.Distance(transform.position,
+            //   (Vector2)patrolSpot[RandomNode].position) < 0.5f)
+            //{
+            //    return;
+            //}
             curPath = 
                 pathfinder.FindPath(transform.position,
                 (Vector2)patrolSpot[RandomNode].position);
@@ -155,51 +149,51 @@ public class AIStatePatten : MonoBehaviour
             yield return null;
         }
     }
-    void Alert() //경계 상태.
-    {
-        gameObject.GetComponent<AI>().movespeed = 10f;
+    //void Alert() //경계 상태.
+    //{
+    //    gameObject.GetComponent<AI>().movespeed = 10f;
 
-        Vector2 targetVector = (player.transform.position - gameObject.transform.position);
-        Coroutine alertcoroutine = StartCoroutine(AlertTime());
+    //    Vector2 targetVector = (player.transform.position - gameObject.transform.position);
+    //    Coroutine alertcoroutine = StartCoroutine(AlertTime());
 
-        if (this.alertTime <= 0f)
-        {
-            StopCoroutine(alertcoroutine);
-            ChangeState(State.Mission);
-            this.alertTime = 5f;
-            nextNode = 0;
+    //    if (this.alertTime <= 0f)
+    //    {
+    //        StopCoroutine(alertcoroutine);
+    //        ChangeState(State.Mission);
+    //        this.alertTime = 5f;
+    //        nextNode = 0;
 
-        }
+    //    }
 
-    }
-    void Defence() //경계 상태.
-    {
-        Debug.Log("방어!");
-        //if (targetVector.sqrMagnitude < distance * distance)
-        //{
-        //    float angle = Vector2.Angle(targetVector.normalized, transform.up);
+    //}
+    //void Defence() //경계 상태.
+    //{
+    //    Debug.Log("방어!");
+    //    //if (targetVector.sqrMagnitude < distance * distance)
+    //    //{
+    //    //    float angle = Vector2.Angle(targetVector.normalized, transform.up);
 
-        //    if (angle < angleRange)
-        //    {
-        //        ChangeState(State.Battle);
-        //    }
-        //}
-    }
-    IEnumerator AlertTime()
-    {
-        this.alertTime -= Time.deltaTime;
-        yield return new WaitForSeconds(0.1f);
-    }
-    void AISwapWeapon()
-    {
-        if (gameObject.GetComponent<AI>().weaponmanager.HAND[0] == null)
-        {
-            gameObject.GetComponent<AI>().weaponmanager.BuyWeapon(gameObject.GetComponent<AI>().weaponmanager.WeaponInfo[30]);
-            return;
-        }
-        if (gameObject.GetComponent<AI>().weaponmanager.curweapon != gameObject.GetComponent<AI>().weaponmanager.HAND[0])
-        {
-            gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
-        }
-    }
+    //    //    if (angle < angleRange)
+    //    //    {
+    //    //        ChangeState(State.Battle);
+    //    //    }
+    //    //}
+    //}
+    //IEnumerator AlertTime()
+    //{
+    //    this.alertTime -= Time.deltaTime;
+    //    yield return new WaitForSeconds(0.1f);
+    //}
+    //void AISwapWeapon()
+    //{
+    //    if (gameObject.GetComponent<AI>().weaponmanager.HAND[0] == null)
+    //    {
+    //        gameObject.GetComponent<AI>().weaponmanager.BuyWeapon(gameObject.GetComponent<AI>().weaponmanager.WeaponInfo[30]);
+    //        return;
+    //    }
+    //    if (gameObject.GetComponent<AI>().weaponmanager.curweapon != gameObject.GetComponent<AI>().weaponmanager.HAND[0])
+    //    {
+    //        gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
+    //    }
+    //}
 }
