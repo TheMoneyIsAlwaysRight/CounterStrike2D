@@ -29,7 +29,7 @@ public class PosManager : MonoBehaviour
         CreateGrid();
     }
 
-    //Method : 맵을 기반으로 Grid 생성 
+    //Method : 맵에 격자 상 좌표를 지정하는 함수
     void CreateGrid()
     {
         nodeArray = new Node[gridSizeX, gridSizeY]; //start에서 계산한 크기만큼 노드 2차원 배열 생성
@@ -45,7 +45,9 @@ public class PosManager : MonoBehaviour
             }
         }
     }
-    public Node NodeFromWorldPoint(Vector3 worldPosition) //현재 캐릭터가 서 있는 노드가 어딘지 반환.
+
+    //Method : 월드 공간 좌표를 격자 상 좌표로 변환 함수
+    public Node NodeFromWorldPoint(Vector3 worldPosition)
     {
 
         float percentX = (worldPosition.x - worldBottomLeft.x) / gridWorldSize.x;
@@ -67,8 +69,6 @@ public class PosManager : MonoBehaviour
                 }
             }
         }
-
-        Debug.Log("오류");
         return null;
     }
 
