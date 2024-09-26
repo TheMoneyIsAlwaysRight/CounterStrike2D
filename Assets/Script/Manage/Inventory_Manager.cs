@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.IO.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR;
 
 public class Inventory_Manager : MonoBehaviour
 {
