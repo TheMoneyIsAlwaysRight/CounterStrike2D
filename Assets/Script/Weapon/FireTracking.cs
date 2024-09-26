@@ -18,7 +18,7 @@ public class FIRETRACKING : MonoBehaviour
         if (collision.gameObject.GetComponent<Human>())
         {
             Human human = collision.gameObject.GetComponent<Human>();
-            human.GetComponent<IDamagable>().Damage(human, weaponManager.curweapon.damage);
+            human.GetComponent<IDamagable>().Damage(human, weaponManager.curWeapon.damage);
         }
     }
     public IEnumerator FiretrackerCoroutine()

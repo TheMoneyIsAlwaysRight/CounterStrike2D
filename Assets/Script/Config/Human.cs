@@ -18,7 +18,7 @@ public class Human : MonoBehaviour, IDamagable
     [SerializeField] Animator animator;
     [SerializeField] GameObject FireFlash;
     [SerializeField] GameObject FireFlash2;
-    [SerializeField] public Inventory_Manager weaponmanager;
+    public Inventory_Manager inven;
     [SerializeField] AudioClip reloadsound;
     [SerializeField] AudioClip reloadsound2;
     [SerializeField] public AudioSource audiosource;
@@ -70,14 +70,14 @@ public class Human : MonoBehaviour, IDamagable
     public IEnumerator RecoilCoroutine()
     {
         IsRecoil = true;
-        yield return new WaitForSeconds(weaponmanager.curweapon.firecooltime);
+        yield return new WaitForSeconds(inven.curWeapon.firecooltime);
         IsRecoil = false;
         //audiosource.Play(reloadsound);
     }
 
     public void Fire()
     {
-        Weapon curweapon = transform.gameObject.GetComponentInChildren<Inventory_Manager>().curweapon;
+        Weapon curweapon = transform.gameObject.GetComponentInChildren<Inventory_Manager>().curWeapon;
         if (IsRecoil)
         { //발사 쿨타임 동안 제외
             return;

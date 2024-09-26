@@ -109,6 +109,56 @@ MonoBehaviour:
   dropPrefab: {fileID: 5553699255905741285, guid: 6098039f1aec817488fa2bfe9ecf85db, type: 3}
   firepoint: {fileID: 2517409223996242447}
   FireSound: {fileID: 0}
+--- !u!1 &578421243477556532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2287015618670174826}
+  - component: {fileID: 4367617490887022760}
+  m_Layer: 0
+  m_Name: StateMachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2287015618670174826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578421243477556532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1594873139011377657}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4367617490887022760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578421243477556532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec37adaf4879fc40a5558000988a0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 5080451708305175464}
+  inven: {fileID: 5741894235634716431}
+  pathfinder: {fileID: 8142461299216830420}
+  player: {fileID: 0}
+  isCaptureEnemy: 0
+  curstate: 0
 --- !u!1 &750778203518005628
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +342,7 @@ SpriteRenderer:
   m_SortingLayerID: -634650253
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6d6e67c96fc82304b8ee7d502629b51c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b03b3b8a37150e4fbd362cfebbcac60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1169,7 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fa5216f1bf7e1478df3013607b24b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aIStatePatten: {fileID: 4274740903092909341}
+  aIStatePatten: {fileID: 4367617490887022760}
 --- !u!1 &3627700489187143744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,8 +1518,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  curweapon: {fileID: 0}
-  prevweapon: {fileID: 0}
+  curWeapon: {fileID: 0}
+  prevWeapon: {fileID: 0}
   CanIPlantBomb: 0
   IsBuyCant: 0
 --- !u!114 &2387973379520804617
@@ -1939,7 +1989,6 @@ GameObject:
   - component: {fileID: 5411567015505558796}
   - component: {fileID: 4870246785209211381}
   - component: {fileID: 5080451708305175464}
-  - component: {fileID: 4274740903092909341}
   m_Layer: 0
   m_Name: 'NPC '
   m_TagString: Untagged
@@ -1964,6 +2013,7 @@ Transform:
   - {fileID: 4328813045032955686}
   - {fileID: 1999826616388183359}
   - {fileID: 1735309247287616221}
+  - {fileID: 2287015618670174826}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &19354977201420739
@@ -2070,28 +2120,11 @@ MonoBehaviour:
   animator: {fileID: 4870246785209211381}
   FireFlash: {fileID: 5551545160347515022}
   FireFlash2: {fileID: 3365289905278440215}
-  weaponmanager: {fileID: 5741894235634716431}
+  inven: {fileID: 5741894235634716431}
   reloadsound: {fileID: 0}
   reloadsound2: {fileID: 0}
   audiosource: {fileID: 0}
   movespeed: 0
---- !u!114 &4274740903092909341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5605190496523314031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec37adaf4879fc40a5558000988a0b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FindEnemyNodeListParent: {fileID: 0}
-  pathfinder: {fileID: 8142461299216830420}
-  player: {fileID: 0}
-  isCaptureEnemy: 0
-  curstate: 0
 --- !u!1 &5657834329308963376
 GameObject:
   m_ObjectHideFlags: 0

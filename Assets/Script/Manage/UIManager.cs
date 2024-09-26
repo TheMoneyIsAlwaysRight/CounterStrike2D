@@ -23,8 +23,8 @@ public class UIManager : MonoBehaviour
         if (playerweaponManager != null)
         {
             //this.Curweapon.text = playerweaponManager.curweapon.name;
-            this.maxammo.text = (playerweaponManager.curweapon.maxammo).ToString();
-            this.magazine.text = (playerweaponManager.curweapon.magazine).ToString();
+            this.maxammo.text = (playerweaponManager.curWeapon.maxammo).ToString();
+            this.magazine.text = (playerweaponManager.curWeapon.magazine).ToString();
         }
     }
     void CheckState()

@@ -12,7 +12,10 @@ public class AIStatePatten : MonoBehaviour
         Die,
     }
 
-    [SerializeField] GameObject PatrolSpot_Array; //적군 정찰 노드 리스트
+
+    public AI ai;
+    public Inventory_Manager inven;
+
     [SerializeField] PathFinding pathfinder;
 
     Vector2 targetVector;
@@ -22,7 +25,10 @@ public class AIStatePatten : MonoBehaviour
     List<Node> ForReconPositionNodeTrack;
 
 
+    GameObject PatrolSpot_Array; //적군 정찰 노드 리스트
+    [HideInInspector]
     public GameObject player;
+
     public bool isCaptureEnemy;
     float AimToEnemyTime = .1f;
     float alertTime = 1f;
@@ -34,11 +40,13 @@ public class AIStatePatten : MonoBehaviour
 
     private void Awake()
     {
+        PatrolSpot_Array = GameObject.Find("Enemy_Patrol_Spot");//임시용
         patrolSpot = PatrolSpot_Array.GetComponentsInChildren<Transform>().ToList<Transform>();
     }
     private void Start()
     {
         nextNode = 0;
+        player = GameObject.Find("Player"); //임시용  
         ChangeState(State.Mission);
     }
     public void ChangeState(State state) //상태 바꾸기
@@ -63,14 +71,14 @@ public class AIStatePatten : MonoBehaviour
         while (isCaptureEnemy)
         {
             //목표를 똑바로 바라보기.
-            Vector2 targetVector = (player.transform.position - transform.position);
-            transform.up = (targetVector).normalized;
+            Vector2 targetVector = (player.transform.position - ai.transform.position);
+            ai.transform.up = (targetVector).normalized;
             
             // 사격하되,탄약이 떨어지면 재장전 함수 호출.
-            gameObject.GetComponent<AI>().Fire();
-            if (gameObject.GetComponent<AI>(). weaponmanager.curweapon.magazine <= 0)
+            ai.Fire();
+            if (inven.curWeapon.magazine <= 0)
             {
-                gameObject.GetComponent<AI>().Reload(gameObject.GetComponent<AI>().weaponmanager.curweapon);
+                ai.Reload(inven.curWeapon);
             }
             yield return null;
         }
@@ -78,8 +86,8 @@ public class AIStatePatten : MonoBehaviour
     void Mission()
     {
         aimCoroutine = null;
-        gameObject.GetComponent<AI>().movespeed = 10f;
-       // gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
+        ai.movespeed = 10f;
+        //inven.ChangeWeapon(inven.HAND[0]);
         if(pathCoroutine != null) { StopCoroutine(pathCoroutine); }
 
         //현재 목표 경로가 없을 경우, 경로 추출.
@@ -107,7 +115,7 @@ public class AIStatePatten : MonoBehaviour
         {
             StopCoroutine(pathCoroutine);
         }
-        gameObject.GetComponent<AI>().movespeed = 0;
+        ai.movespeed = 0;
         aimCoroutine = StartCoroutine(AimFire());
     }
     void Die() //사망 상태
@@ -123,12 +131,12 @@ public class AIStatePatten : MonoBehaviour
         {
             //생성된 경로의 맨 앞 정점을 바라보며 이동.
             Node nextNode = curPath[0];
-            Vector2 dir = (nextNode.worldPosition - transform.position).normalized;
-            transform.Translate(dir * Time.deltaTime * gameObject.GetComponent<AI>().movespeed, Space.World);
-            transform.up = dir;
+            Vector2 dir = (nextNode.worldPosition - ai.transform.position).normalized;
+            ai.transform.Translate(dir * Time.deltaTime * ai.movespeed, Space.World);
+            ai.transform.up = dir;
 
             //경로 상의 정점들을 도달할 때
-            if (Vector2.Distance(transform.position, nextNode.worldPosition) < 2f)
+            if (Vector2.Distance(ai.transform.position, nextNode.worldPosition) < 2f)
             {
                 //남은 경로가 없을 경우. 즉 경로의 끝에 도달한 경우.
                 if (curPath.Count <= 1)

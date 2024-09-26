@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3273593775267504074}
   - component: {fileID: 7978011021199469451}
   - component: {fileID: 8695620204917673425}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: AWP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   weaponnumber: 35
   weaponstyle: 0
   WeaponName: 
-  damage: 15
+  damage: 100
   maxammo: 100
   magazine: 30
   magazineCapacity: 30
@@ -108,7 +108,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2389188657431610390, guid: 2b5ef652759dd7a4fa46e1074a772619, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: aa4cdcf8f783f4449bad4a4f8865f3ca, type: 3}
 --- !u!1 &556651160745230288
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2279464785808154787}
   - component: {fileID: 1086481002930352954}
   - component: {fileID: 3979280077223910937}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FAMAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3612328292289210282, guid: e74182818bf90004abfc9a283614c728, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: cfdc250303b0ed74d95ff06d1664b770, type: 3}
 --- !u!1 &649699266968075590
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 5506560831674722126}
   - component: {fileID: 7652118687668426218}
   - component: {fileID: 5240890018761218234}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: ELITE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3909310748764325053, guid: 6b6ba016eef730a44984e4cb2adf0f24, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 7c9a5c8e443a17c4da588ebd883f8f3f, type: 3}
 --- !u!1 &955366469669586389
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 5932760487715785204}
   - component: {fileID: 7187293544655848425}
   - component: {fileID: 6392390525498801627}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: sg552
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +435,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3337234118964428762, guid: 46993ce24dcbacf4ea95214a7eaffeda, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: b3c449f5b4838ac4a944e106845b8a55, type: 3}
 --- !u!1 &984855812106324736
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 6119562680421895850}
   - component: {fileID: 1833523798461497227}
   - component: {fileID: 1926024599183699272}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: DEAGLE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ MonoBehaviour:
   weaponnumber: 3
   weaponstyle: 1
   WeaponName: 
-  damage: 15
+  damage: 40
   maxammo: 100
   magazine: 30
   magazineCapacity: 30
@@ -544,7 +544,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 4479919105691261347, guid: 9b7be572208f0f54ea11e8cc631a5957, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 907be15a061319a43809ad42cd49ec8e, type: 3}
 --- !u!1 &995461995525894336
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 7615861705688832603}
   - component: {fileID: 7203494064130896353}
   - component: {fileID: 7798077809611443757}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: xm1014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +653,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6922047153903477196, guid: 07ea6cc5d1cb4ca4db9d54c0eeb1efcb, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 3483003c051d1b3488a2508c8d411129, type: 3}
 --- !u!1 &1182216546280139173
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 6749316065082740866}
   - component: {fileID: 8700280777950795062}
   - component: {fileID: 8167227360016548011}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: usp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -762,7 +762,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 7505006380398487099, guid: b9abad014ea862747b0ea1b688d68bed, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 14758e6fc1d439f489f81ee48b20347f, type: 3}
 --- !u!1 &1185844716878993768
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 7762133511166583111}
   - component: {fileID: 4559235101755893106}
   - component: {fileID: 7001554805789222715}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: ump45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +871,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 5961932110395093913, guid: 6bb82389f26ab5c46a7986cab9a65224, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: abb954ed9801d144e93bb67ae30ba218, type: 3}
 --- !u!1 &1523054499344187034
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 7119313930542423644}
   - component: {fileID: 5771196818738036955}
   - component: {fileID: 8099023141067122828}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: sg550
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +980,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 1909913157640074229, guid: 5441ed48921641545b0fdcfedb755bff, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 4130f04c5366b634a81a213e1045b3d0, type: 3}
 --- !u!1 &1549337729411647996
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 1749814040566727301}
   - component: {fileID: 5108666724412083445}
   - component: {fileID: 8417363202906399625}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: BOMB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2407713109183638370, guid: 9a1aa2b07e8f91042bf1db1ce574b7b0, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 3213cfd60ffc25242a3317ffb0c6039c, type: 3}
 --- !u!114 &8417363202906399625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696930f0feefd3f47af17022565094f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlantedBomb: {fileID: 5668764560892168095, guid: ba40b91c3f9cd6a4ead07bd34fc8f1aa, type: 3}
+  PlantedBomb: {fileID: 7255889114073358530, guid: c14f7acba0d649441a4ae748d19e3612, type: 3}
   BombHUD: {fileID: 0}
 --- !u!1 &1830832914445697242
 GameObject:
@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 1033529711297344191}
   - component: {fileID: 3487024131011974398}
   - component: {fileID: 7811066105697147204}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: tmp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2775532415019169083, guid: 01988df6f80afa34c9c4aec2cc78d191, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 06bb7dcc3d497f646a14a37b7483123a, type: 3}
 --- !u!1 &2901295882915518576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,8 +1225,8 @@ GameObject:
   - component: {fileID: 2721885927366288920}
   - component: {fileID: 6409819620148640653}
   - component: {fileID: 5205092739363993341}
-  m_Layer: 0
-  m_Name: WeaponDataManager
+  m_Layer: 4
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1339,7 +1339,7 @@ GameObject:
   - component: {fileID: 8062447723693946422}
   - component: {fileID: 6266473519626036299}
   - component: {fileID: 8117946346073320341}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: AUG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1436,7 +1436,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 7046813788975839758, guid: 642dafb6f416ba247a089c4abc0114f9, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 49419f8890b917b478d829b8ee48745e, type: 3}
 --- !u!1 &3374698639957259882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1448,7 @@ GameObject:
   - component: {fileID: 810460795594530923}
   - component: {fileID: 3868453321948309301}
   - component: {fileID: 1515495709294951459}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: p90
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6226747081241871960, guid: 0568b8bda4ded0147a203dc53d0cbcd2, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 6440b9d45963a114e918f556d72920c6, type: 3}
 --- !u!1 &3623150874333746385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,7 +1557,7 @@ GameObject:
   - component: {fileID: 718494052865897428}
   - component: {fileID: 4094671665271816312}
   - component: {fileID: 3279669626244542353}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: AK-47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1646,15 +1646,15 @@ MonoBehaviour:
   weaponnumber: 30
   weaponstyle: 0
   WeaponName: 
-  damage: 15
+  damage: 30
   maxammo: 100
   magazine: 30
   magazineCapacity: 30
-  firecooltime: 0.21
+  firecooltime: 0.13
   reloadtime: 3
   dropPrefab: {fileID: 1432911431909425359, guid: cb963d8ca240b05498e4a0bf5ca68294, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 5fa27a6c03298224d86944b4b30dbdbf, type: 3}
 --- !u!1 &3633621433535524648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1666,7 @@ GameObject:
   - component: {fileID: 6476141775009209650}
   - component: {fileID: 392005801764051098}
   - component: {fileID: 213338594168878963}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: mac10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1763,7 +1763,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2813660748378044094, guid: 76a373389941d924f9909179fd94d68d, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: d25a461da665e4f40a87703f9a3a7ec5, type: 3}
 --- !u!1 &3663695055165578484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,7 +1775,7 @@ GameObject:
   - component: {fileID: 8454732972053263777}
   - component: {fileID: 4384019747506346409}
   - component: {fileID: 5050487595685000107}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: mp5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1872,7 +1872,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 5553699255905741285, guid: 6098039f1aec817488fa2bfe9ecf85db, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: ba2de36cfccee244dbc5946367e97b79, type: 3}
 --- !u!1 &3713361848978292987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,7 +1884,7 @@ GameObject:
   - component: {fileID: 6830776801439190971}
   - component: {fileID: 2462184788034239906}
   - component: {fileID: 9130908171437930016}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: GLOCK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 3977944179001267047, guid: a91eb7032dacc5a47b55f622ef640850, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 6714fa500dd7f944c9e53fa2db3ae370, type: 3}
 --- !u!1 &3822802010294459383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,7 +1996,8 @@ GameObject:
   - component: {fileID: 1347999212253094925}
   - component: {fileID: 3589987615575168737}
   - component: {fileID: 3469501782736902127}
-  m_Layer: 0
+  - component: {fileID: 5762959478232415794}
+  m_Layer: 4
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2115,21 +2116,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff5cf2b2e6433d4fbd95ad0db4d9828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T: 0
+  T: 1
   Team: 
-  hp: 188
+  hp: 5000
   ap: 0
   money: 0
   firetrack: {fileID: 2431692717069173649}
   animator: {fileID: 1347999212253094925}
   FireFlash: {fileID: 6754048765398245350}
   FireFlash2: {fileID: 4990231667850773189}
-  weaponmanager: {fileID: 6409819620148640653}
-  reloadsound: {fileID: 0}
-  reloadsound2: {fileID: 0}
-  audiosource: {fileID: 0}
+  inven: {fileID: 0}
+  reloadsound: {fileID: 8300000, guid: 49e7d9178205443479d28c1c3c58f4f9, type: 3}
+  reloadsound2: {fileID: 8300000, guid: 285b7d7c628f76f45891cd974d092b3c, type: 3}
+  audiosource: {fileID: 5762959478232415794}
   BuyLogo: {fileID: 0}
-  movespeed: 9.73
+  movespeed: 6
 --- !u!114 &3469501782736902127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,6 +2161,102 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!82 &5762959478232415794
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3822802010294459383}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3931480399920613929
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,7 +2268,7 @@ GameObject:
   - component: {fileID: 250569900558568117}
   - component: {fileID: 8580635780026788494}
   - component: {fileID: 5600181378269109035}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: m249
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2261,14 +2358,14 @@ MonoBehaviour:
   weaponstyle: 0
   WeaponName: 
   damage: 15
-  maxammo: 100
-  magazine: 30
+  maxammo: 400
+  magazine: 200
   magazineCapacity: 30
-  firecooltime: 0.3
+  firecooltime: 0.1
   reloadtime: 3
   dropPrefab: {fileID: 3786274634129217071, guid: 7fa353c4b7174a84aa25be342da2b8da, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: f97e61fe92dab1f4fa6fc14fec08a7c7, type: 3}
 --- !u!1 &4079893982549611455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,7 +2377,7 @@ GameObject:
   - component: {fileID: 83688706573831365}
   - component: {fileID: 2798856638538609734}
   - component: {fileID: 7973606277580137500}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FIVESEVEN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2377,7 +2474,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 8133845880362589041, guid: 2a6e233ef199e954d86ece914768e43f, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: cabfcb2f480c49e4cad35e4807b1103e, type: 3}
 --- !u!1 &4201632408665062169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,7 +2486,7 @@ GameObject:
   - component: {fileID: 5627421150256965180}
   - component: {fileID: 5010686584560440445}
   - component: {fileID: 3131664931085458493}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: scout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,7 +2583,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6822156600451235756, guid: 00592385b6a6d644f919a50d54595062, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 9cba5ea3974cdf44f85f4d56c72b8998, type: 3}
 --- !u!1 &4265946853000353514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,7 +2594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2969823346321411582}
   - component: {fileID: 7328269590870297415}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Renderer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2583,7 +2680,7 @@ GameObject:
   - component: {fileID: 7512052448715326642}
   - component: {fileID: 7282429941777346312}
   - component: {fileID: 6681298252885590061}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: m3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2680,7 +2777,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6662434010620261726, guid: 5d9df2d01da9f5d48af7773da4e23fb2, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: a18baa353f4a33d4d9779f1a2ec35add, type: 3}
 --- !u!1 &4847442892924109562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,7 +2789,7 @@ GameObject:
   - component: {fileID: 8046278389153548515}
   - component: {fileID: 3625688506798874846}
   - component: {fileID: 441210855234801567}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: G3SG1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2789,7 +2886,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 2791274659651454459, guid: 8ef38cc1aa7969d4db73a082a4d0051f, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 818651121b02f494fbf66b1e601bccc8, type: 3}
 --- !u!1 &4862317094812304335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,7 +2898,7 @@ GameObject:
   - component: {fileID: 318422334971468344}
   - component: {fileID: 2643894942499617171}
   - component: {fileID: 7568972287233991858}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FLASHBANG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2910,7 +3007,7 @@ GameObject:
   - component: {fileID: 4856999955388599299}
   - component: {fileID: 3256703981152693903}
   - component: {fileID: 6922587466236167690}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3007,7 +3104,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 0}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: f4e481f6071acc44aa3d3552d0bee522, type: 3}
 --- !u!1 &5711388521255943574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,7 +3116,7 @@ GameObject:
   - component: {fileID: 1621053293734193131}
   - component: {fileID: 2267268532213396034}
   - component: {fileID: 6812656683529330861}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: m4a1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3116,7 +3213,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6809943812970459611, guid: 8c89342543c2b884c8106c80fd925536, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 89c3f3054a1374943bb988085852ed00, type: 3}
 --- !u!1 &6015111599550190272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,7 +3225,7 @@ GameObject:
   - component: {fileID: 2490692737701804515}
   - component: {fileID: 6879311488077423396}
   - component: {fileID: 943266357596964065}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: GALIL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3225,7 +3322,7 @@ MonoBehaviour:
   reloadtime: 3
   dropPrefab: {fileID: 6616260358776549176, guid: 50e2a941f9f438c4e897785c4636ff51, type: 3}
   firepoint: {fileID: 8073259366560393799}
-  FireSound: {fileID: 0}
+  FireSound: {fileID: 8300000, guid: 7f54e8b93127a514290d8fe94890e87d, type: 3}
 --- !u!1 &6968688859221011066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,13 +3335,13 @@ GameObject:
   - component: {fileID: 6291486989970992764}
   - component: {fileID: 2431692717069173649}
   - component: {fileID: 5937681152494673970}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FireLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8329155327953494459
 Transform:
   m_ObjectHideFlags: 0
@@ -3255,7 +3352,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.054434523, y: -0.12247685, z: 0}
-  m_LocalScale: {x: 1.3608587, y: 0.4, z: 0}
+  m_LocalScale: {x: 1.3608587, y: 0.18, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2146028546522514021}
@@ -3321,8 +3418,8 @@ LineRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.4965768
-        value: 0.50745773
+        time: 0.48449183
+        value: 0.49375534
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -3440,7 +3537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146028546522514021}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -3476,6 +3573,10 @@ PrefabInstance:
     - target: {fileID: 2854698415069090116, guid: 5d310e960a4b3bf4eafd093152db5116, type: 3}
       propertyPath: m_Name
       value: bulletFlash2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2854698415069090116, guid: 5d310e960a4b3bf4eafd093152db5116, type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2854698415069090116, guid: 5d310e960a4b3bf4eafd093152db5116, type: 3}
       propertyPath: m_IsActive
@@ -3626,6 +3727,10 @@ PrefabInstance:
     - target: {fileID: 3524293427427294140, guid: 89e29c07740730c4b99c66eba963bd60, type: 3}
       propertyPath: m_Name
       value: bulletFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524293427427294140, guid: 89e29c07740730c4b99c66eba963bd60, type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3524293427427294140, guid: 89e29c07740730c4b99c66eba963bd60, type: 3}
       propertyPath: m_IsActive

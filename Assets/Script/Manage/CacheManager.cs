@@ -7,7 +7,7 @@ public class CacheManager : MonoBehaviour
     static CacheManager instance;
     public static CacheManager Inst => instance;
 
-    public WaitForSeconds cacheWFS = new WaitForSeconds(0.1f);
+    public WaitForSeconds cacheWFS = new WaitForSeconds(0.05f);
     private void Awake()
     {
         if(instance != null)

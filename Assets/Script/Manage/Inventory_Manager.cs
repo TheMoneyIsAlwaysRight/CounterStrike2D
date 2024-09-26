@@ -12,13 +12,12 @@ public class Inventory_Manager : MonoBehaviour
     [SerializeField] GameObject BuyMenu;
     [SerializeField] Human user;
 
-    [HideInInspector]
     public Weapon[] HAND = new Weapon[5]; //현재 가진 무기 목록
     public Dictionary<int, Weapon> WeaponInfo = new Dictionary<int, Weapon>(); // 모든 무기는 무기번호로 지정됨.
-    [HideInInspector]
-    public Weapon curweapon; //현재 무기
-    [HideInInspector]
-    public Weapon prevweapon;
+
+    public Weapon curWeapon; //현재 무기
+    public Weapon prevWeapon;
+
     [HideInInspector]
     public bool CanIPlantBomb;
     [HideInInspector]
@@ -43,7 +42,7 @@ public class Inventory_Manager : MonoBehaviour
         }
 
         HAND[2] = WeaponInfo[50]; // weapon number 50 -> knife
-        curweapon = HAND[2];
+        curWeapon = HAND[2];
         //user.audiosource.clip = curweapon.FireSound;
 
     }
@@ -53,13 +52,13 @@ public class Inventory_Manager : MonoBehaviour
     }
     private void Update()
     {
-        curweapon.gameObject.SetActive(true);
+        curWeapon.gameObject.SetActive(true);
     }
     void OnReload()
     {
         if (user != null)
         {
-          user.Reload(curweapon);
+          user.Reload(curWeapon);
         }
     }
 
@@ -105,17 +104,17 @@ public class Inventory_Manager : MonoBehaviour
     }
     void DropWeapon()
     {
-        if(curweapon == HAND[2])
+        if(curWeapon == HAND[2])
         {
             return;
         }
-        if (curweapon != prevweapon)
+        if (curWeapon != prevWeapon)
         {
-            GameObject dropitem = curweapon.GetComponent<Weapon>().dropPrefab;
+            GameObject dropitem = curWeapon.GetComponent<Weapon>().dropPrefab;
             Instantiate(dropitem, droppoint.transform.position, transform.rotation);
             for (int x = 0; x < HAND.Length; x++) //무기를 버린 뒤 현재 무기 목록에서 지움.
             {
-                if (curweapon == HAND[x])
+                if (curWeapon == HAND[x])
                 {
                     HAND[x] = null;
                 }
@@ -152,29 +151,28 @@ public class Inventory_Manager : MonoBehaviour
 
 
 
-    public void ChangeWeapon(Weapon swapweapon) //다른 무기로 들기.
+    public void ChangeWeapon(Weapon next) //다른 무기로 들기.
     {
 
-        if(curweapon == swapweapon) // 기존 무기와 동일한 무기를 들려할 경우
+        if(curWeapon == next) // 기존 무기와 동일한 무기를 들려할 경우
         {
-            prevweapon = null;
             return;
         }
         // 교체하려는 그 무기를 가지고 있었을 때만 
-        if (HAND[swapweapon.weaponstyle] == swapweapon) 
-        {   prevweapon = curweapon;
-            //이전 무기 비활성화 및 새 무기 활성화.
-            prevweapon.gameObject.SetActive(false);
-            curweapon = swapweapon;
+        if (HAND[next.weaponstyle] == next)
+        {
+            if(prevWeapon == null) { prevWeapon = HAND[2]; }
+            prevWeapon = curWeapon;
+            prevWeapon.gameObject.SetActive(false);
+            curWeapon = next;
 
         }
-        else if(HAND[swapweapon.weaponstyle] != swapweapon)
+        else if(HAND[next.weaponstyle] != next)
         {
-            prevweapon = HAND[2]; //전 무기를 칼로 고정.
-            Debug.Log("2");
-            this.curweapon = swapweapon;
-            prevweapon.gameObject.SetActive(false);
-            curweapon.gameObject.SetActive(true);
+            prevWeapon = HAND[2]; //전 무기를 칼로 고정.
+            this.curWeapon = next;
+            prevWeapon.gameObject.SetActive(false);
+            curWeapon.gameObject.SetActive(true);
         }
 
         //user.audiosource.clip = swapweapon.FireSound;
@@ -221,7 +219,7 @@ public class Inventory_Manager : MonoBehaviour
         if (CanIPlantBomb)
         {
             ChangeWeapon(HAND[2]);
-            prevweapon = null;
+            prevWeapon = null;
             HAND[4] = null;
         }
     }
