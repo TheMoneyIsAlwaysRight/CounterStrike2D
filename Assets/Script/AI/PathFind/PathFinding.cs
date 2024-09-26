@@ -17,7 +17,7 @@ public class PathFinding : MonoBehaviour
 
     public void Start()
     {
-        grid = PathManager.Inst.nodeArray;
+        grid = PosManager.Inst.nodeArray;
     }
 
 
@@ -25,8 +25,8 @@ public class PathFinding : MonoBehaviour
     public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
         //현재 위치한 정점과 목표 정점까지의 격자 상 좌표 호출
-        Node startNode = PathManager.Inst.NodeFromWorldPoint(startPos);
-        Node targetNode = PathManager.Inst.NodeFromWorldPoint(targetPos);
+        Node startNode = PosManager.Inst.NodeFromWorldPoint(startPos);
+        Node targetNode = PosManager.Inst.NodeFromWorldPoint(targetPos);
 
         //각 경로들에 사용할 리스트들 모두 초기화
         openSet.Clear(); 
@@ -123,8 +123,8 @@ public class PathFinding : MonoBehaviour
 
     public List<Node> GetNeighbors(Node node)
     {
-        int gridSizeX = PathManager.Inst.gridSizeX;
-        int gridSizeY = PathManager.Inst.gridSizeY;
+        int gridSizeX = PosManager.Inst.gridSizeX;
+        int gridSizeY = PosManager.Inst.gridSizeY;
 
         this.neighbors.Clear();
 

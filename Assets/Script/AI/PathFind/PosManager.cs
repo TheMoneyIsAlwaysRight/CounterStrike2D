@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathManager : MonoBehaviour
+public class PosManager : MonoBehaviour
 {
-    static PathManager instance;
-    public static PathManager Inst { get { return instance; } }
+    static PosManager instance;
+    public static PosManager Inst { get { return instance; } }
 
     [Header("이동 불가능 지역의 레이어 마스크")]
     public LayerMask unwalkableMask; //지나갈 수 없는 지역을 나타내는 레이어마스크
