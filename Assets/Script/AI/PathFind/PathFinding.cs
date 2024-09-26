@@ -4,24 +4,34 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+//Class : 적군에 붙어있는 A* 알고리즘 기반 길찾기 
 public class PathFinding : MonoBehaviour
 {
     List<Node> openSet = new List<Node>(); //간 적 없는 정점들
     List<Node> visited = new List<Node>(); //이미 방문한 정점들
+    List<Node> path = new List<Node>(); //최종적으로 반환할 경로
+
+    Node[,] grid;
+
+    List<Node> neighbors = new List<Node>();
+
+    public void Start()
+    {
+        grid = PathManager.Inst.nodeArray;
+    }
+
 
     //Method : A* 알고리즘 이용한 경로 찾기
     public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        if(PathManager.Inst.nodeArray == null)
-        { Debug.LogError($"NodeArray is NULL");
-            return null;
-        }
         //현재 위치한 정점과 목표 정점까지의 격자 상 좌표 호출
         Node startNode = PathManager.Inst.NodeFromWorldPoint(startPos);
         Node targetNode = PathManager.Inst.NodeFromWorldPoint(targetPos);
 
+        //각 경로들에 사용할 리스트들 모두 초기화
         openSet.Clear(); 
-        visited.Clear(); 
+        visited.Clear();
+        path.Clear();
 
         //0. 시작 정점 OpenList 삽입
         openSet.Add(startNode);
@@ -48,7 +58,6 @@ public class PathFinding : MonoBehaviour
             // 4. 현재 정점이 목표 정점과 동일하다면 경로를 찾은 것이므로 경로를 구성하여 반환
             if (node == targetNode)
             {
-                List<Node> path = new List<Node>();
                 Node currentNode = targetNode;
 
                 // 목표 정점부터 시작 정점까지 부모 노드를 따라 경로를 구성
@@ -59,9 +68,7 @@ public class PathFinding : MonoBehaviour
                 }
                 // 경로를 뒤집어 시작 노드에서 목표 노드 순으로 정렬
                 path.Reverse();
-
                 return path; // 경로 반환
-
             }
 
             //현재 정점에서 주변의 3 x 3 을 검사
@@ -118,9 +125,8 @@ public class PathFinding : MonoBehaviour
     {
         int gridSizeX = PathManager.Inst.gridSizeX;
         int gridSizeY = PathManager.Inst.gridSizeY;
-        Node[,] grid = PathManager.Inst.nodeArray;
 
-        List<Node> neighbors = new List<Node>();
+        this.neighbors.Clear();
 
         // 현재 정점을 기준으로 3x3 주변을 검사하여 인접 정점 목록에 추가
         for (int x = -1; x <= 1; x++)
@@ -146,30 +152,4 @@ public class PathFinding : MonoBehaviour
         }
         return neighbors;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
-
-    //    if (grid != null)
-    //    {
-    //        foreach (Node n in grid)
-    //        {
-    //            Gizmos.color = (n.walkable) ? Color.white : Color.red;
-    //            if (path != null)
-    //            {
-    //                if (path.Contains(n))
-    //                {
-    //                    Gizmos.color = Color.black;
-    //                }
-    //            }
-    //            else
-    //            {
-    //            }
-    //            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
-
-    //        }
-    //    }
-    //}
 }
