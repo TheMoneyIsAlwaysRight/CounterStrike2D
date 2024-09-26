@@ -15,15 +15,12 @@ public class PathFinding : MonoBehaviour
 
     List<Node> neighbors = new List<Node>();
 
-    public void Start()
-    {
-        grid = PosManager.Inst.nodeArray;
-    }
-
 
     //Method : A* 알고리즘 이용한 경로 찾기
     public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
+        if(grid == null) { grid = PosManager.Inst.nodeArray; } //임시 땜빵용
+
         //현재 위치한 정점과 목표 정점까지의 격자 상 좌표 호출
         Node startNode = PosManager.Inst.NodeFromWorldPoint(startPos);
         Node targetNode = PosManager.Inst.NodeFromWorldPoint(targetPos);
@@ -121,7 +118,7 @@ public class PathFinding : MonoBehaviour
         return 14 * dstX + 10 * (dstY - dstX);
     }
 
-    public List<Node> GetNeighbors(Node node)
+    List<Node> GetNeighbors(Node node)
     {
         int gridSizeX = PosManager.Inst.gridSizeX;
         int gridSizeY = PosManager.Inst.gridSizeY;

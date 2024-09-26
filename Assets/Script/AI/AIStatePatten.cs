@@ -116,6 +116,7 @@ public class AIStatePatten : MonoBehaviour
 
 
     //Coroutine : AI가 A* 알고리즘으로 생성된 경로를 따라 움직이는 코루틴.
+    //-> 잘못된 로직으로 인해 유니티 프로파일러에서 순간적으로 가장 높은 CPU 점유율을 보임.
     IEnumerator AIPath()
     {
         while (curPath.Count > 0)
@@ -143,7 +144,7 @@ public class AIStatePatten : MonoBehaviour
                     curPath.RemoveAt(0);
                 }
             }
-            yield return null;
+            yield return CacheManager.Inst.cacheWFS;
         }
     }
     //void Alert() //경계 상태.
