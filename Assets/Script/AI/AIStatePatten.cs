@@ -80,18 +80,15 @@ public class AIStatePatten : MonoBehaviour
         aimCoroutine = null;
         gameObject.GetComponent<AI>().movespeed = 10f;
        // gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
+        if(pathCoroutine != null) { StopCoroutine(pathCoroutine); }
 
         //현재 목표 경로가 없을 경우, 경로 추출.
         if (curPath == null)
         {
+
             //순찰 지점들 중 랜덤으로 한 지점을 선택
             int RandomNode = Random.Range(0,patrolSpot.Count-1);
-            //현재 지점과 목표 지점의 간의 경로 추출
-            //if (Vector2.Distance(transform.position,
-            //   (Vector2)patrolSpot[RandomNode].position) < 0.5f)
-            //{
-            //    return;
-            //}
+
             curPath = 
                 pathfinder.FindPath(transform.position,
                 (Vector2)patrolSpot[RandomNode].position);
@@ -99,9 +96,9 @@ public class AIStatePatten : MonoBehaviour
             nextNode = 0;
             ChangeState(State.Mission);
         }
-        else //경로가 있다면, 경로 따라가기 로직 실행.
+        else //경로가 있다면, 경로 따라가기 코루틴 실행.
         {
-            pathCoroutine = StartCoroutine(AIPath());
+           pathCoroutine = StartCoroutine(AIPath());
         }
     }
     void Battle() //교전 상태.
