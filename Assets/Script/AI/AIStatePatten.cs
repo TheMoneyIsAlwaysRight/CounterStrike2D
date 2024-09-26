@@ -83,7 +83,7 @@ public class AIStatePatten : MonoBehaviour
     {
         aimCoroutine = null;
         gameObject.GetComponent<AI>().movespeed = 10f;
-        gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
+       // gameObject.GetComponent<AI>().weaponmanager.ChangeWeapon(gameObject.GetComponent<AI>().weaponmanager.HAND[0]);
 
         //현재 목표 경로가 없을 경우, 경로 추출.
         if (curPath == null)

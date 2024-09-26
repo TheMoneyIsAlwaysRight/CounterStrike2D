@@ -18,7 +18,6 @@ public class PathManager : MonoBehaviour
     float nodeDiameter; // 노드의 지름(격자 한칸의 변의 길이를 설정해줄 크기)
 
     public Node[,] nodeArray;
-    public List<Node> path;
     Vector3 worldBottomLeft;
 
     private void Awake()
@@ -73,31 +72,30 @@ public class PathManager : MonoBehaviour
         return null;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
 
-        if (nodeArray != null)
-        {
-            foreach (Node n in nodeArray)
-            {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                if (path != null)
-                {
-                    if (path.Contains(n))
-                    {
-                        Gizmos.color = Color.black;
-                    }
-                }
-                else
-                {
-                }
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
+    //    if (nodeArray != null)
+    //    {
+    //        foreach (Node n in nodeArray)
+    //        {
+    //            Gizmos.color = (n.walkable) ? Color.white : Color.red;
+    //            if (path != null)
+    //            {
+    //                if (path.Contains(n))
+    //                {
+    //                    Gizmos.color = Color.black;
+    //                }
+    //            }
+    //            else
+    //            {
+    //            }
+    //            Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
 
-            }
-        }
-        //}
+    //        }
+    //    }
 
-    }
+    //}
 }

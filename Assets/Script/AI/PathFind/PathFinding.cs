@@ -59,8 +59,6 @@ public class PathFinding : MonoBehaviour
                 }
                 // 경로를 뒤집어 시작 노드에서 목표 노드 순으로 정렬
                 path.Reverse();
-                // 경로를 PathManager에 설정
-                PathManager.Inst.path = path;
 
                 return path; // 경로 반환
 
